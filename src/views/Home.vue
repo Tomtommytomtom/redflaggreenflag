@@ -2,6 +2,7 @@
 <template>
 <div class="h-full p-2">
   <div id="outer-box" class="outer-box w-full p-2">
+    <!-- <div class="ball"></div> -->
     <Header/>
     <div class="grow-bottom-container">
       <div class="flex inner-box">
@@ -14,10 +15,10 @@
     </div>
     <Footer class="mt-16"/>
   </div>
-
+  <!-- <button @click="playAnimation">play animation</button> -->
 </div>
 </template>
-
+      <circle id="ball" cx="50" cy="50" r="5"/>
 <script setup>
 import { onMounted, ref } from "vue"
 import { nRandomPerks, nRandomNegatives } from "../utils"
@@ -25,6 +26,7 @@ import PerksColumn from "@/components/PerksColumn.vue"
 import NegativeColumn from "@/components/NegativeColumn.vue"
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue"
+import { addBouncePathToDocument, playAll } from "@/path"
 
 const red = ref([])
 const green = ref([])
@@ -40,55 +42,8 @@ look totally different`
 reroll()
 
 onMounted(() => {
-  const outerBox = document.getElementById("outer-box").getBoundingClientRect()
-  const firstPerkBox = document.getElementById("0-perk").getBoundingClientRect()
-  const firstNegativeBox = document.getElementById("0-negative").getBoundingClientRect()
-
-
-  console.log(firstPerkBox);
-  console.log(firstNegativeBox);
-
-  //TODO: change constants with relative values to screen size
-  const firstBouncingPoint = {
-    x: Math.round(firstPerkBox.right - 50),
-    y: Math.round(firstPerkBox.top)
-  }
-
-  const secondBouncingPoint = {
-    x: Math.round(firstNegativeBox.right - 80),
-    y: Math.round(firstNegativeBox.top)
-  }
-  
-  const startingPoint = {
-    x: Math.round(outerBox.left),
-    y: Math.round(firstBouncingPoint.y - 120)
-  }
-  
-  const endingPoint = {
-    x: Math.round(outerBox.right),
-    y: Math.round(secondBouncingPoint.y - 80)
-  }
-
-  console.log(firstBouncingPoint);
-  console.log(secondBouncingPoint);
-
-  const svg = document.getElementById("svg-overlay")
-  
-  const firstPath = document.createElementNS('http://www.w3.org/2000/svg',"path")
-  firstPath.setAttributeNS(null,"d",`M ${startingPoint.x} ${startingPoint.y} Q ${startingPoint.x + 100} ${startingPoint.y} ${firstBouncingPoint.x} ${firstBouncingPoint.y}`)
-  firstPath.setAttributeNS(null,"style","fill:none;stroke:#000000;stroke-width:1px;stroke-dasharray:4")
-  svg.appendChild(firstPath)
-  
-  const secondPath = document.createElementNS('http://www.w3.org/2000/svg',"path")
-  secondPath.setAttributeNS(null,"d",`M ${firstBouncingPoint.x} ${firstBouncingPoint.y} Q ${firstBouncingPoint.x + 100} ${firstBouncingPoint.y - 200} ${secondBouncingPoint.x} ${secondBouncingPoint.y}`)
-  secondPath.setAttributeNS(null,"style","fill:none;stroke:#000000;stroke-width:1px;stroke-dasharray:4")
-  svg.appendChild(secondPath)
-
-  const finalPath = document.createElementNS('http://www.w3.org/2000/svg',"path")
-  finalPath.setAttributeNS(null,"d",`M ${secondBouncingPoint.x} ${secondBouncingPoint.y} Q ${secondBouncingPoint.x + 40} ${secondBouncingPoint.y - 100} ${endingPoint.x} ${endingPoint.y}`)
-  finalPath.setAttributeNS(null,"style","fill:none;stroke:#000000;stroke-width:1px;stroke-dasharray:4")
-  svg.appendChild(finalPath)
-
+  addBouncePathToDocument()
+  playAll()
 })
 </script>
 
@@ -114,6 +69,16 @@ onMounted(() => {
   flex-grow: 1;
   justify-content: flex-end;
 }
+
+/* .ball{
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 999px;
+  position: absolute;
+  x-offset: -10px;
+  y-offset: -10px;
+} */
 
 
 </style>

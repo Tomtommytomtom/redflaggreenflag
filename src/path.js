@@ -76,7 +76,7 @@ export const playFirstAnimation = (next) => {
     strokeDashoffset: [anime.setDashoffset, 0],
     easing: 'easeInCubic',
     complete: next,
-    duration: 1500,
+    duration: 800,
     // delay: function(el, i) { return i * 250 },
   })
 
@@ -90,7 +90,7 @@ export const playFirstAnimation = (next) => {
     translateY: p('y'),
     easing: 'easeInCubic',
     angle: p('angle'),
-    duration: 1500,
+    duration: 800,
   });
   showElement("#first-path")
 }
@@ -103,7 +103,8 @@ export const playSecondAnimation = (next) => {
     strokeDashoffset: [anime.setDashoffset, 0],
     easing,
     complete: next,
-    duration: 1500,
+    
+    duration: 1000,
     delay: function(el, i) { return i * 250 },
   })
 
@@ -117,7 +118,7 @@ export const playSecondAnimation = (next) => {
     translateY: p('y'),
     easing,
     angle: p('angle'),
-    duration: 1500,
+    duration: 1000,
   });
   showElement("#second-path")
 }
@@ -129,7 +130,7 @@ export const playThirdAnimation = () => {
     targets:"#third-path",
     strokeDashoffset: [anime.setDashoffset, 0],
     easing,
-    duration: 400,
+    duration: 500,
     delay: function(el, i) { return i * 250 },
   })
 

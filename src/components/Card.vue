@@ -1,12 +1,13 @@
 <template>
-  <div class="box italic">
-    {{props.text}}
+  <div class="box italic flex items-center w-full">
+    {{visible ? props.text : ''}}
   </div>
 </template>
 
 <script setup>
 const props = defineProps({
-  text: String
+  text: String,
+  visible: Boolean,
 })
 </script>
 

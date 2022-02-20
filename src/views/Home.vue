@@ -2,23 +2,21 @@
 <template>
 <div class="h-full p-2">
   <div id="outer-box" class="outer-box w-full p-2">
-    <!-- <div class="ball"></div> -->
     <Header/>
     <div class="grow-bottom-container">
       <div class="flex inner-box">
-        <PerksColumn class="w-1/2" :perks="green" />
+        <PerksColumn class="w-1/2" :perks="positives" :visible="visiblePositives" />
         <div class="w-1/2">
-          <PerksColumn style="visibility:hidden;" :perks="green" />
-          <NegativeColumn  :negatives="red"/>
+          <PerksColumn style="visibility:hidden;" :visible="visiblePositives" :perks="positives" />
+          <NegativeColumn  :negatives="negatives" :visible="visibleNegatives"/>
         </div>
       </div>
     </div>
     <Footer class="mt-16"/>
   </div>
-  <!-- <button @click="playAnimation">play animation</button> -->
 </div>
 </template>
-      <circle id="ball" cx="50" cy="50" r="5"/>
+
 <script setup>
 import { onMounted, ref } from "vue"
 import { nRandomPerks, nRandomNegatives } from "../utils"
@@ -26,24 +24,43 @@ import PerksColumn from "@/components/PerksColumn.vue"
 import NegativeColumn from "@/components/NegativeColumn.vue"
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue"
-import { addBouncePathToDocument, playAll } from "@/path"
+import { addBouncePathToDocument, playFirstAnimation, playSecondAnimation, playThirdAnimation } from "@/path"
 
-const red = ref([])
-const green = ref([])
+const negatives = ref([])
+const positives = ref([])
+
+const negativeCount = ref(1)
+const positiveCount = ref(2)
+
+const visiblePositives = ref([])
+const visibleNegatives = ref([])
 
 const reroll = () => {
-  green.value = nRandomPerks(2)
-  red.value = nRandomNegatives(1)
-  red.value[0] = `The two halves of their
-face don‘t match /
-Both are attractive but
-look totally different`
+  positives.value = nRandomPerks(positiveCount.value)
+  negatives.value = nRandomNegatives(negativeCount.value)
+  visiblePositives.value = Array(positiveCount.value).fill(false)
+  visibleNegatives.value = Array(negativeCount.value).fill(false)
 }
 reroll()
 
+const secondBounce = () => {
+  visibleNegatives.value = visibleNegatives.value.map(() => true)
+  playThirdAnimation()
+}
+
+const firstBounce = () => {
+  visiblePositives.value = visiblePositives.value.map(() => true)
+  playSecondAnimation(secondBounce)
+}
+
+const play = () => {
+  playFirstAnimation(firstBounce)
+}
+
+window.addEventListener("click",play)
+
 onMounted(() => {
   addBouncePathToDocument()
-  playAll()
 })
 </script>
 

@@ -2,8 +2,8 @@
 </script>
 
 <template>
-  <div>
-    <main>
+  <div class="h-full">
+    <main class="h-full">
       <router-view />
     </main>
   </div>

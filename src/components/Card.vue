@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box italic">
     {{props.text}}
   </div>
 </template>
@@ -13,7 +13,8 @@ const props = defineProps({
 <style>
 .box {
   border: 1px solid black;
-  padding: 1em .5em;
-  font-size: 24px;
+  padding: 2em 1em;
+  font-size: 12px;
+  height: calc(1.2em * 6 + 3em);
 }
 </style>

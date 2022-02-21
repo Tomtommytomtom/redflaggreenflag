@@ -68,87 +68,79 @@ const showElement = (qsl) => {
   el.style.opacity = 1;
 }
 
-export const playFirstAnimation = (next) => {
+const hideElement = (qsl) => {
+  const el = document.querySelector(qsl)
+  console.log(el);
+  el.style.opacity = 0;
+}
+
+const TARGETS = [
+  "#first-path",
+  "#second-path",
+  "#third-path",
+  ".ball",
+]
+
+export const resetAnimations = () => {
+  TARGETS.forEach(hideElement)
+}
+
+export const stopAnimations = () => {
+  TARGETS.forEach(anime.remove)
+}
+
+const buildPathAndBallAnimation = (pathSelector,ballSelector,options) => () => {
+  const path = anime({
+    targets: pathSelector,
+    strokeDashoffset: [anime.setDashoffset, 0],
+    ...options
+  })
+
+  const p = anime.path(pathSelector)
+
+  const ball = anime({
+    targets: ballSelector,
+    translateX: p('x'),
+    translateY: p('y'),
+    angle: p('angle'),
+    ...options
+  })
+
+  return [path,ball]
+}
+
+const first = buildPathAndBallAnimation("#first-path",".ball",{ 
+  duration: 800,
+  easing: "easeInCubic"
+})
+
+const second = buildPathAndBallAnimation("#second-path",".ball",{ 
+  duration: 1200,
+  easing: "cubicBezier(0.010, 0.25, 0.70, 0.010)"
+})
+
+const third = buildPathAndBallAnimation("#third-path",".ball",{ 
+  duration: 500,
+  easing: "easeOutCubic"
+})
+
+export const playAll = async (afterFirst,afterSecond, afterThird) => {
   showElement(".ball")
-  
-  anime({
-    targets:"#first-path",
-    strokeDashoffset: [anime.setDashoffset, 0],
-    easing: 'easeInCubic',
-    complete: next,
-    duration: 800,
-    // delay: function(el, i) { return i * 250 },
-  })
-
-  const p = anime.path('#first-path')
-
-  console.log(p("x"));
-
-  anime({
-    targets: '.ball',
-    translateX: p('x'),
-    translateY: p('y'),
-    easing: 'easeInCubic',
-    angle: p('angle'),
-    duration: 800,
-  });
   showElement("#first-path")
-}
+  const firstAnimations = first()
+  await Promise.all(firstAnimations.map(a => a.finished))
+  afterFirst?.()
 
-export const playSecondAnimation = (next) => {
-  const easing = 'cubicBezier(0.010, 0.25, 0.70, 0.010)'
-  
-  anime({
-    targets:"#second-path",
-    strokeDashoffset: [anime.setDashoffset, 0],
-    easing,
-    complete: next,
-    
-    duration: 1000,
-    delay: function(el, i) { return i * 250 },
-  })
-
-  const p = anime.path('#second-path')
-
-  console.log(p("x"));
-
-  anime({
-    targets: '.ball',
-    translateX: p('x'),
-    translateY: p('y'),
-    easing,
-    angle: p('angle'),
-    duration: 1000,
-  });
+  console.log("before second");
   showElement("#second-path")
-}
-
-export const playThirdAnimation = () => {
-  const easing = 'easeOutCubic'
-
-  anime({
-    targets:"#third-path",
-    strokeDashoffset: [anime.setDashoffset, 0],
-    easing,
-    duration: 500,
-    delay: function(el, i) { return i * 250 },
-  })
-
-  const p = anime.path('#third-path')
-
-  console.log(p("x"));
-
-  anime({
-    targets: '.ball',
-    translateX: p('x'),
-    translateY: p('y'),
-    easing,
-    angle: p('angle'),
-    duration: 400,
-  });
+  const secondAnimations = second()
+  await Promise.all(secondAnimations.map(a => a.finished))
+  afterSecond?.()
+  console.log("before third");
   showElement("#third-path")
-}
+  const thirdAnimations = third()
+  await Promise.all(thirdAnimations.map(a => a.finished))
+  afterThird?.()
 
-export const playAll = () => {
-  playFirstAnimation(() => playSecondAnimation(playThirdAnimation))
+  return [...firstAnimations,...secondAnimations,...thirdAnimations]
 }

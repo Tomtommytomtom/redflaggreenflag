@@ -24,12 +24,12 @@ import PerksColumn from "@/components/PerksColumn.vue"
 import NegativeColumn from "@/components/NegativeColumn.vue"
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue"
-import { addBouncePathToDocument, playFirstAnimation, playSecondAnimation, playThirdAnimation } from "@/path"
+import { addBouncePathToDocument, playAll, stopAnimations, resetAnimations } from "@/path"
 
 const negatives = ref([])
 const positives = ref([])
 
-const negativeCount = ref(1)
+const negativeCount = ref(2)
 const positiveCount = ref(2)
 
 const visiblePositives = ref([])
@@ -45,19 +45,21 @@ reroll()
 
 const secondBounce = () => {
   visibleNegatives.value = visibleNegatives.value.map(() => true)
-  playThirdAnimation()
 }
 
 const firstBounce = () => {
   visiblePositives.value = visiblePositives.value.map(() => true)
-  playSecondAnimation(secondBounce)
 }
 
+
 const play = () => {
-  playFirstAnimation(firstBounce)
+  stopAnimations()
+  resetAnimations()
+  playAll(firstBounce,secondBounce,undefined)
 }
 
 window.addEventListener("click",play)
+window.addEventListener("touchstart",play)
 
 onMounted(() => {
   addBouncePathToDocument()

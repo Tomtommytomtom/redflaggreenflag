@@ -1,28 +1,76 @@
 import anime from "animejs/lib/anime.es.js"
 
-export const addBouncePathToDocument = () => {
-  const outerBox = document.getElementById("outer-box").getBoundingClientRect()
-  const firstPerkBox = document.getElementById("0-perk").getBoundingClientRect()
-  const firstNegativeBox = document.getElementById("0-negative").getBoundingClientRect()
+const drawBezierCurveArc = ({ a, b, c, svg, id}) => {  
+  const path = document.createElementNS('http://www.w3.org/2000/svg',"path")
+  path.setAttributeNS(null,"id",id)
+  path.setAttributeNS(null,"d",`M ${a.x} ${a.y} Q ${b.x} ${b.y} ${c.x} ${c.y}`)
+  path.setAttributeNS(null,"style","fill:none;stroke:#000000;stroke-width:1px;opacity:0;")
+  svg.appendChild(path)
+  return path
+}
 
+const getMiddle = (pointA,pointB,offset) => {
+  return { x: pointA.x + (pointB.x - pointA.x) / 2, y: pointA.y - offset }
+}
+
+const buildWithOffset = (box, element) => {
+  console.log(element.left,box.left);
+  return {
+    left: element.left - box.left,
+    right: element.right - box.left,
+    top: element.top - box.top,
+    bottom: element.bottom - box.top
+  }
+}
+
+export const addBouncePathToDocument = () => {
+  const outerBoxRaw = document.getElementById("outer-box").getBoundingClientRect()
+  const firstPerkBoxRaw = document.getElementById("0-perk").getBoundingClientRect()
+  const firstNegativeBoxRaw = document.getElementById("0-negative").getBoundingClientRect()
+
+  const outerBox = { left: 0, top: 0, bottom: outerBoxRaw.bottom - outerBoxRaw.top, right: outerBoxRaw.right - outerBoxRaw.left}
+  const firstPerkBox = buildWithOffset(outerBoxRaw,firstPerkBoxRaw)
+  const firstNegativeBox = buildWithOffset(outerBoxRaw,firstNegativeBoxRaw)
+
+  console.log(outerBox,firstPerkBox,firstNegativeBox);
+
+
+
+  // const firstPerkBox = {...firstPerkBoxRaw, left: firstPerkBoxRaw.left - outerBoxRaw.left, top: firstPerkBoxRaw.top - outerBoxRaw.top, right: firstPerkBoxRaw.right - outerBoxRaw.left, lefy}
+
+
+
+  const boxLength = firstPerkBoxRaw.width
+
+  console.log(outerBox.top);
+
+  let distanceBetweenOuterboxAndFirstBox = Math.round((firstPerkBox.top - outerBox.top) / 2)
+  let startingPointY = outerBox.top + distanceBetweenOuterboxAndFirstBox
+  if(distanceBetweenOuterboxAndFirstBox < firstPerkBoxRaw.height){
+    distanceBetweenOuterboxAndFirstBox = (firstPerkBox.top - outerBox.top)
+    startingPointY = outerBox.top
+  }
+
+  console.log(distanceBetweenOuterboxAndFirstBox, "CWUDYGVDE");
 
   console.log(firstPerkBox);
   console.log(firstNegativeBox);
 
   //TODO: change constants with relative values to screen size
+  
+  const startingPoint = {
+    x: Math.round(outerBox.left),
+    y: Math.round(startingPointY)
+  }
+
   const firstBouncingPoint = {
-    x: Math.round(firstPerkBox.right - 50),
+    x: Math.round(firstPerkBox.right - boxLength * 1/3),
     y: Math.round(firstPerkBox.top)
   }
 
   const secondBouncingPoint = {
-    x: Math.round(firstNegativeBox.right - 80),
+    x: Math.round(firstNegativeBox.right - boxLength * 1/3),
     y: Math.round(firstNegativeBox.top)
-  }
-  
-  const startingPoint = {
-    x: Math.round(outerBox.left),
-    y: Math.round(firstBouncingPoint.y - 120)
   }
   
   const endingPoint = {
@@ -30,28 +78,42 @@ export const addBouncePathToDocument = () => {
     y: Math.round(secondBouncingPoint.y - 80)
   }
 
+  const firstControlPoint = getMiddle(startingPoint,firstBouncingPoint,0)
+
+  const secondControlPoint = getMiddle(firstBouncingPoint,secondBouncingPoint,distanceBetweenOuterboxAndFirstBox * 3/2)
+  
+  const thirdControlPoint = getMiddle(endingPoint,secondBouncingPoint,0)
+  
+  
+
   console.log(firstBouncingPoint);
   console.log(secondBouncingPoint);
 
   const svg = document.getElementById("svg-overlay")
-  
-  const firstPath = document.createElementNS('http://www.w3.org/2000/svg',"path")
-  firstPath.setAttributeNS(null,"id","first-path")
-  firstPath.setAttributeNS(null,"d",`M ${startingPoint.x} ${startingPoint.y} Q ${startingPoint.x + 100} ${startingPoint.y} ${firstBouncingPoint.x} ${firstBouncingPoint.y}`)
-  firstPath.setAttributeNS(null,"style","fill:none;stroke:#000000;stroke-width:1px;opacity:0;")
-  svg.appendChild(firstPath)
-  
-  const secondPath = document.createElementNS('http://www.w3.org/2000/svg',"path")
-  secondPath.setAttributeNS(null,"id","second-path")
-  secondPath.setAttributeNS(null,"d",`M ${firstBouncingPoint.x} ${firstBouncingPoint.y} Q ${firstBouncingPoint.x + 100} ${firstBouncingPoint.y - 200} ${secondBouncingPoint.x} ${secondBouncingPoint.y}`)
-  secondPath.setAttributeNS(null,"style","fill:none;stroke:#000000;stroke-width:1px;opacity:0;")
-  svg.appendChild(secondPath)
 
-  const finalPath = document.createElementNS('http://www.w3.org/2000/svg',"path")
-  finalPath.setAttributeNS(null,"id","third-path")
-  finalPath.setAttributeNS(null,"d",`M ${secondBouncingPoint.x} ${secondBouncingPoint.y} Q ${secondBouncingPoint.x + 40} ${secondBouncingPoint.y - 100} ${endingPoint.x} ${endingPoint.y}`)
-  finalPath.setAttributeNS(null,"style","fill:none;stroke:#000000;stroke-width:1px;opacity:0;")
-  svg.appendChild(finalPath)
+  svg.style.height = outerBoxRaw.height
+
+  drawBezierCurveArc({
+    a: startingPoint,
+    b: firstControlPoint,
+    c: firstBouncingPoint,
+    svg,
+    id: "first-path"
+  })
+  drawBezierCurveArc({
+    a: firstBouncingPoint,
+    b: secondControlPoint,
+    c: secondBouncingPoint,
+    svg,
+    id: "second-path"
+  })
+  drawBezierCurveArc({
+    a: secondBouncingPoint,
+    b: thirdControlPoint,
+    c: endingPoint,
+    svg,
+    id: "third-path"
+  })
 
   const ball = document.createElementNS('http://www.w3.org/2000/svg','circle')
   ball.setAttributeNS(null,'cx',0)

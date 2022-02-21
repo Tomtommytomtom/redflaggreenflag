@@ -1,7 +1,11 @@
 
 <template>
-<div class="h-full p-2">
-  <div id="outer-box" class="outer-box w-full p-2">
+<div class="p-2">
+  <svg id="svg-overlay" class="svg-overlay absolute">
+    <!-- <circle id="ball" cx="50" cy="50" r="5" class="ball"/> -->
+  </svg>
+  <div id="outer-box" class="outer-box h-full w-full p-2 relative">
+    
     <Header/>
     <div class="grow-bottom-container">
       <div class="flex inner-box">
@@ -26,11 +30,13 @@ import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue"
 import { addBouncePathToDocument, playAll, stopAnimations, resetAnimations } from "@/path"
 
-const negatives = ref([])
 const positives = ref([])
+const negatives = ref([])
 
-const negativeCount = ref(2)
+
 const positiveCount = ref(2)
+const negativeCount = ref(1)
+
 
 const visiblePositives = ref([])
 const visibleNegatives = ref([])
@@ -76,10 +82,11 @@ onMounted(() => {
 }
 
 .outer-box{
+  /* hack */
+  min-height: calc(100vh - 1rem);
   border: 2px solid black;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 .grow-bottom-container{
@@ -89,15 +96,10 @@ onMounted(() => {
   justify-content: flex-end;
 }
 
-/* .ball{
-  width: 10px;
-  height: 10px;
-  background-color: black;
-  border-radius: 999px;
+.svg-overlay{
   position: absolute;
-  x-offset: -10px;
-  y-offset: -10px;
-} */
-
+  height: 100%;
+  width: calc(100% - 20px);
+}
 
 </style>

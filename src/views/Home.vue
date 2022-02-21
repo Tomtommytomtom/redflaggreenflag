@@ -9,8 +9,15 @@
     <Header/>
     <div class="grow-bottom-container">
       <div class="flex inner-box">
-        <PerksColumn class="w-1/2" :perks="positives" :visible="visiblePositives" />
-        <div class="w-1/2">
+        <div class="w-1/2 flex flex-col pr-1">
+          <PerksColumn :perks="positives" :visible="visiblePositives" />
+          <span style="visibility:hidden;">AND</span>
+          <div class="flex">
+            <button @click="next" class="box grow mr-1">DATE</button>
+            <button @click="next" class="black-box grow">(NEXT)</button>
+          </div>
+        </div>
+        <div class="w-1/2 pl-1">
           <PerksColumn style="visibility:hidden;" :visible="visiblePositives" :perks="positives" />
           <NegativeColumn  :negatives="negatives" :visible="visibleNegatives"/>
         </div>
@@ -64,8 +71,19 @@ const play = () => {
   playAll(firstBounce,secondBounce,undefined)
 }
 
-window.addEventListener("click",play)
-window.addEventListener("touchstart",play)
+const next = () => {
+  play()
+  reroll()
+}
+
+const firstClick = () => {
+  play()
+  window.removeEventListener("click",firstClick)
+  window.removeEventListener("touchstart",firstClick)
+}
+
+window.addEventListener("click",firstClick)
+window.addEventListener("touchstart",firstClick)
 
 onMounted(() => {
   addBouncePathToDocument()
@@ -100,6 +118,14 @@ onMounted(() => {
   position: absolute;
   height: 100%;
   width: calc(100% - 20px);
+}
+
+.black-box {
+  background-color: black;
+  color: white;
+  padding: 2em 1em;
+  font-size: 12px;
+  height: calc(1.2em * 6 + 3em);
 }
 
 </style>

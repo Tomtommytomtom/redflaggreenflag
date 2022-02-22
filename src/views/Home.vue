@@ -13,8 +13,8 @@
           <PerksColumn :perks="positives" :visible="visiblePositives" />
           <span style="visibility:hidden;">AND</span>
           <div class="flex">
-            <button @click="next" class="box grow mr-1">DATE</button>
-            <button @click="next" class="black-box grow">(NEXT)</button>
+            <button @click="date" :disabled="disableButtons" class="box grow mr-1">DATE</button>
+            <button @click="next" :disabled="disableButtons" class="black-box grow">(NEXT)</button>
           </div>
         </div>
         <div class="w-1/2 pl-1">
@@ -35,7 +35,9 @@ import PerksColumn from "@/components/PerksColumn.vue"
 import NegativeColumn from "@/components/NegativeColumn.vue"
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue"
-import { addBouncePathToDocument, playAll, stopAnimations, resetAnimations } from "@/path"
+import { drawPaths, playFirstAnimationSequence, stopAllAnimationSequences, resetAllAnimationSequences, playSecondAnimationSequence, playThirdAnimationSequence } from "@/path"
+
+const disableButtons = ref(true)
 
 const positives = ref([])
 const negatives = ref([])
@@ -66,14 +68,34 @@ const firstBounce = () => {
 
 
 const play = () => {
-  stopAnimations()
-  resetAnimations()
-  playAll(firstBounce,secondBounce,undefined)
+  playFirstAnimationSequence(firstBounce,secondBounce,() => { disableButtons.value = false })
+}
+
+const resetEverything = () => {
+  stopAllAnimationSequences()
+  resetAllAnimationSequences()
+  addListeners()
 }
 
 const next = () => {
-  play()
-  reroll()
+  disableButtons.value = true
+  const callbacks = Array()
+  callbacks[3] = () => {
+    resetEverything()
+    reroll()
+  }
+  playThirdAnimationSequence(...callbacks)
+}
+
+const date = () => {
+  disableButtons.value = true
+  const callbacks = Array()
+  callbacks[4] = () => {
+    resetEverything()
+    reroll()
+  }
+
+  playSecondAnimationSequence(...callbacks)
 }
 
 const firstClick = () => {
@@ -82,11 +104,15 @@ const firstClick = () => {
   window.removeEventListener("touchstart",firstClick)
 }
 
-window.addEventListener("click",firstClick)
-window.addEventListener("touchstart",firstClick)
+const addListeners = () => {
+  window.addEventListener("click",firstClick)
+  window.addEventListener("touchstart",firstClick)
+}
+addListeners()
+
 
 onMounted(() => {
-  addBouncePathToDocument()
+  drawPaths()
 })
 </script>
 

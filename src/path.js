@@ -1,4 +1,5 @@
 import anime from "animejs/lib/anime.es.js"
+import { dropShadow } from "tailwindcss/defaultTheme"
 
 const drawBezierCurveArc = ({ a, b, c, svg, id}) => {  
   const path = document.createElementNS('http://www.w3.org/2000/svg',"path")
@@ -8,6 +9,18 @@ const drawBezierCurveArc = ({ a, b, c, svg, id}) => {
   svg.appendChild(path)
   return path
 }
+
+const drawBall = (id) => {
+  const svg = document.getElementById("svg-overlay")
+  const ball = document.createElementNS('http://www.w3.org/2000/svg','circle')
+  ball.setAttributeNS(null,'cx',0)
+  ball.setAttributeNS(null,'cy',0)
+  ball.setAttributeNS(null,'id',id)
+  ball.setAttributeNS(null,'r','5px')
+  ball.setAttributeNS(null,'style',"fill:#000000;opacity:0;")
+  svg.appendChild(ball)
+}
+
 
 const getMiddle = (pointA,pointB,offset) => {
   return { x: pointA.x + (pointB.x - pointA.x) / 2, y: pointA.y - offset }
@@ -23,22 +36,30 @@ const buildWithOffset = (box, element) => {
   }
 }
 
-export const addBouncePathToDocument = () => {
+const placeFlag = () => {
+  const svg = document.getElementById("flag")
+  const outerBoxRaw = document.getElementById("outer-box").getBoundingClientRect()
+  const lastNegativeBoxRaw = document.getElementsByClassName("last-negative")[0].getBoundingClientRect()
+
+  const outerBox = { left: 0, top: 0, bottom: outerBoxRaw.bottom - outerBoxRaw.top, right: outerBoxRaw.right - outerBoxRaw.left}
+  const lastNegativeBox = buildWithOffset(outerBoxRaw,lastNegativeBoxRaw)
+  
+  
+  const height = outerBox.bottom - lastNegativeBox.bottom
+
+  console.log(outerBox, lastNegativeBox,height, "HJGDFCVDUEY");
+  svg.setAttributeNS(null,"height",height)
+}
+
+const drawFirstAnimationPaths = () => {
   const outerBoxRaw = document.getElementById("outer-box").getBoundingClientRect()
   const firstPerkBoxRaw = document.getElementById("0-perk").getBoundingClientRect()
   const firstNegativeBoxRaw = document.getElementById("0-negative").getBoundingClientRect()
+  const lastNegativeBoxRaw = document.getElementsByClassName("last-negative")[0].getBoundingClientRect()
 
   const outerBox = { left: 0, top: 0, bottom: outerBoxRaw.bottom - outerBoxRaw.top, right: outerBoxRaw.right - outerBoxRaw.left}
   const firstPerkBox = buildWithOffset(outerBoxRaw,firstPerkBoxRaw)
   const firstNegativeBox = buildWithOffset(outerBoxRaw,firstNegativeBoxRaw)
-
-  console.log(outerBox,firstPerkBox,firstNegativeBox);
-
-
-
-  // const firstPerkBox = {...firstPerkBoxRaw, left: firstPerkBoxRaw.left - outerBoxRaw.left, top: firstPerkBoxRaw.top - outerBoxRaw.top, right: firstPerkBoxRaw.right - outerBoxRaw.left, lefy}
-
-
 
   const boxLength = firstPerkBoxRaw.width
 
@@ -74,16 +95,15 @@ export const addBouncePathToDocument = () => {
   }
   
   const endingPoint = {
-    x: Math.round(outerBox.right),
+    x: Math.round(outerBox.right + 20),
     y: Math.round(secondBouncingPoint.y - 80)
   }
 
   const firstControlPoint = getMiddle(startingPoint,firstBouncingPoint,0)
 
-  const secondControlPoint = getMiddle(firstBouncingPoint,secondBouncingPoint,distanceBetweenOuterboxAndFirstBox * 3/2)
+  const secondControlPoint = getMiddle(firstBouncingPoint,secondBouncingPoint,distanceBetweenOuterboxAndFirstBox)
   
   const thirdControlPoint = getMiddle(endingPoint,secondBouncingPoint,0)
-  
   
 
   console.log(firstBouncingPoint);
@@ -115,18 +135,151 @@ export const addBouncePathToDocument = () => {
     id: "third-path"
   })
 
-  const ball = document.createElementNS('http://www.w3.org/2000/svg','circle')
-  ball.setAttributeNS(null,'cx',0)
-  ball.setAttributeNS(null,'cy',0)
-  ball.setAttributeNS(null,'class','ball')
-  ball.setAttributeNS(null,'r','5px')
-  ball.setAttributeNS(null,'style',"fill:#000000;opacity:0;")
-  svg.appendChild(ball)
+  drawBall("ball")
+  
+}
+
+const drawSecondAnimationPaths = () => {
+  const svg = document.getElementById("svg-overlay")
+  const outerBoxRaw = document.getElementById("outer-box").getBoundingClientRect()
+  const lastNegativeBoxRaw = document.getElementsByClassName("last-negative")[0].getBoundingClientRect()
+
+  const flagRaw = document.getElementById("flag").getBoundingClientRect()
+  const flag = buildWithOffset(outerBoxRaw,flagRaw)
+
+  const outerBox = { left: 0, top: 0, bottom: outerBoxRaw.bottom - outerBoxRaw.top, right: outerBoxRaw.right - outerBoxRaw.left}
+  const lastNegativeBox = buildWithOffset(outerBoxRaw,lastNegativeBoxRaw)
+
+  const bounceWidth = 4/7 * outerBoxRaw.width
+
+  const bounceHeight = outerBox.bottom - lastNegativeBox.bottom + 20
+
+  const startingPoint = {
+    x: outerBox.right,
+    y: lastNegativeBox.bottom + 20
+  }
+
+  const firstBouncingPoint = {
+    x: outerBox.right - 2/5 * bounceWidth,
+    y: outerBox.bottom
+  }
+
+  const secondBouncingPoint = {
+    x: outerBox.right - 4/5 * bounceWidth,
+    y: outerBox.bottom,
+  }
+
+  const lastBouncingPoint = {
+    x: outerBox.right - bounceWidth,
+    y: outerBox.bottom - 5,
+  }
+  
+  console.log(flag);
+
+  const flagHolePoint = {
+    x: flag.left + flagRaw.width * 0.3,
+    y: outerBox.bottom - 5
+  }
+  
+  const inTheGround = { 
+    x: flag.left + flagRaw.width * 0.2,
+    y: outerBox.bottom + 10
+  }
+
+  const inBetweenStartAndFirstBouncingPoint = getMiddle(startingPoint,firstBouncingPoint,0)
+  const inBetweenFirstAndSecondBouncingPoint = getMiddle(firstBouncingPoint,secondBouncingPoint,3/4*bounceHeight)
+  const inBetweenSecondAndLastBouncingPoint = getMiddle(secondBouncingPoint,lastBouncingPoint,1/2*bounceHeight)
+  const inBetweenFlagAndUnderGround = getMiddle(flagHolePoint,inTheGround,0)
+
+
+  drawBezierCurveArc({
+    a: startingPoint,
+    b: inBetweenStartAndFirstBouncingPoint,
+    c: firstBouncingPoint,
+    svg,
+    id: "fourth-path"
+  })
+
+  drawBezierCurveArc({
+    a: firstBouncingPoint,
+    b: inBetweenFirstAndSecondBouncingPoint,
+    c: secondBouncingPoint,
+    svg,
+    id: "fifth-path"
+  })
+
+  drawBezierCurveArc({
+    a: secondBouncingPoint,
+    b: inBetweenSecondAndLastBouncingPoint,
+    c: lastBouncingPoint,
+    svg,
+    id: "sixth-path"
+  })
+
+  drawBezierCurveArc({
+    a: lastBouncingPoint,
+    b: lastBouncingPoint,
+    c: flagHolePoint,
+    svg,
+    id: "seventh-path"
+  })
+
+  drawBezierCurveArc({
+    a: flagHolePoint,
+    b: inBetweenFlagAndUnderGround,
+    c: inTheGround,
+    svg,
+    id: "eighth-path"
+  })
+
+  drawBall("ball-2")
+}
+
+const drawThirdAnimationPaths = () => {
+  const svg = document.getElementById("svg-overlay")
+  const outerBoxRaw = document.getElementById("outer-box").getBoundingClientRect()
+  const lastNegativeBoxRaw = document.getElementsByClassName("last-negative")[0].getBoundingClientRect()
+
+  const flagRaw = document.getElementById("flag").getBoundingClientRect()
+  const flag = buildWithOffset(outerBoxRaw,flagRaw)
+
+  const outerBox = { left: 0, top: 0, bottom: outerBoxRaw.bottom - outerBoxRaw.top, right: outerBoxRaw.right - outerBoxRaw.left}
+  const lastNegativeBox = buildWithOffset(outerBoxRaw,lastNegativeBoxRaw)
+
+  const bounceWidth = 4/7 * outerBoxRaw.width
+
+  const lastBouncingPoint = {
+    x: outerBox.right - bounceWidth,
+    y: outerBox.bottom - 5,
+  }
+
+  const distanceLastBouncingPointAndFlag = lastBouncingPoint.x - flag.left
+
+  const halfwayToFlag = {
+    x: flag.left + distanceLastBouncingPointAndFlag / 2,
+    y: outerBox.bottom - 5,
+  }
+  
+
+
+  drawBezierCurveArc({
+    a: lastBouncingPoint,
+    b: lastBouncingPoint,
+    c: halfwayToFlag,
+    svg,
+    id: "ninth-path"
+  })
+}
+
+export const drawPaths = () => {
+  placeFlag()
+  drawFirstAnimationPaths()
+  drawSecondAnimationPaths()
+  drawThirdAnimationPaths()
 }
 
 const showElement = (qsl) => {
   const el = document.querySelector(qsl)
-  console.log(el);
   el.style.opacity = 1;
 }
 
@@ -136,22 +289,63 @@ const hideElement = (qsl) => {
   el.style.opacity = 0;
 }
 
-const TARGETS = [
+const FIRST_SEQUENCE_TARGETS = [
   "#first-path",
   "#second-path",
   "#third-path",
-  ".ball",
+  "#ball",
 ]
 
-export const resetAnimations = () => {
-  TARGETS.forEach(hideElement)
+const SECOND_SEQUENCE_TARGETS = [
+  "#fourth-path",
+  "#fifth-path",
+  "#sixth-path",
+  "#seventh-path",
+  "#eighth-path",
+  "#ball-2"
+]
+
+const THIRD_SEQUENCE_TARGETS = [
+  "#fourth-path",
+  "#fifth-path",
+  "#sixth-path",
+  "#ninth-path",
+  "#ball-2"
+]
+
+export const resetFirstAnimationSequence = () => {
+  FIRST_SEQUENCE_TARGETS.forEach(hideElement)
+}
+export const resetSecondAnimationSequence = () => {
+  SECOND_SEQUENCE_TARGETS.forEach(hideElement)
+}
+export const resetThirdAnimationSequence = () => {
+  THIRD_SEQUENCE_TARGETS.forEach(hideElement)
 }
 
-export const stopAnimations = () => {
-  TARGETS.forEach(anime.remove)
+export const stopFirstAnimationSequence = () => {
+  FIRST_SEQUENCE_TARGETS.forEach(anime.remove)
+}
+export const stopSecondAnimationSequence = () => {
+  SECOND_SEQUENCE_TARGETS.forEach(anime.remove)
+}
+export const stopThirdAnimationSequence = () => {
+  THIRD_SEQUENCE_TARGETS.forEach(anime.remove)
 }
 
-const buildPathAndBallAnimation = (pathSelector,ballSelector,options) => () => {
+export const stopAllAnimationSequences = () => {
+  stopFirstAnimationSequence()
+  stopSecondAnimationSequence()
+  stopThirdAnimationSequence()
+}
+
+export const resetAllAnimationSequences = () => {
+  resetFirstAnimationSequence()
+  resetSecondAnimationSequence()
+  resetThirdAnimationSequence()
+}
+
+const buildBallFollowsPathAnimation = (pathSelector,ballSelector,options) => () => {
   const path = anime({
     targets: pathSelector,
     strokeDashoffset: [anime.setDashoffset, 0],
@@ -171,38 +365,134 @@ const buildPathAndBallAnimation = (pathSelector,ballSelector,options) => () => {
   return [path,ball]
 }
 
-const first = buildPathAndBallAnimation("#first-path",".ball",{ 
-  duration: 800,
-  easing: "easeInCubic"
-})
+const firstSequence = [
+  buildBallFollowsPathAnimation("#first-path","#ball",{ 
+    duration: 800,
+    easing: "easeInCubic"
+  }),
+  buildBallFollowsPathAnimation("#second-path","#ball",{ 
+    duration: 1200,
+    easing: "cubicBezier(0.010, 0.25, 0.70, 0.010)"
+  }),
+    buildBallFollowsPathAnimation("#third-path","#ball",{ 
+    duration: 500,
+    easing: "easeOutCubic"
+  })
+]
 
-const second = buildPathAndBallAnimation("#second-path",".ball",{ 
-  duration: 1200,
-  easing: "cubicBezier(0.010, 0.25, 0.70, 0.010)"
-})
+const playSequence = async (sequence, callbacks) => {
+  const result = []
+  for(let i = 0; i < sequence.length; i++) {
+    const animations = sequence[i]()
+    result.push(...animations)
+    const hook = callbacks[i]
 
-const third = buildPathAndBallAnimation("#third-path",".ball",{ 
-  duration: 500,
-  easing: "easeOutCubic"
-})
+    await Promise.all(animations.map(a => a.finished))
+    hook?.()
+  }
+  return result
+}
 
-export const playAll = async (afterFirst,afterSecond, afterThird) => {
-  showElement(".ball")
+export const playFirstAnimationSequence = async (...args) => {
+  showElement("#ball")
   showElement("#first-path")
-  const firstAnimations = first()
-  await Promise.all(firstAnimations.map(a => a.finished))
-  afterFirst?.()
 
-  console.log("before second");
-  showElement("#second-path")
-  const secondAnimations = second()
-  await Promise.all(secondAnimations.map(a => a.finished))
-  afterSecond?.()
-  console.log("before third");
-  showElement("#third-path")
-  const thirdAnimations = third()
-  await Promise.all(thirdAnimations.map(a => a.finished))
-  afterThird?.()
+  const shows = [
+    () => showElement("#second-path"),
+    () => showElement("#third-path"),
+    undefined
+  ]
 
-  return [...firstAnimations,...secondAnimations,...thirdAnimations]
+  const curried = shows.map((s,i) => {
+    return () => {
+      s?.()
+      args?.[i]?.()
+    }
+  })
+
+  return playSequence(firstSequence,curried)
+}
+
+const secondSequence = [
+  buildBallFollowsPathAnimation("#fourth-path","#ball-2",{ 
+    duration: 300,
+    easing: "easeInQuad"
+  }),
+  buildBallFollowsPathAnimation("#fifth-path","#ball-2",{ 
+    duration: 400,
+    easing: "cubicBezier(0, 0.42, 1, 0.58)"
+  }),
+  buildBallFollowsPathAnimation("#sixth-path","#ball-2",{ 
+    duration: 200,
+    easing: "cubicBezier(0, 0.42, 1, 0.58)"
+  }),
+  buildBallFollowsPathAnimation("#seventh-path","#ball-2",{ 
+    duration: 1300,
+    easing: "cubicBezier(0.2, 0.5, 0.2, 1)"
+  }),
+  buildBallFollowsPathAnimation("#eighth-path","#ball-2",{ 
+    duration: 200,
+    easing: "easeInQuad"
+  }),
+]
+
+const thirdSequence = [
+  buildBallFollowsPathAnimation("#fourth-path","#ball-2",{ 
+    duration: 400,
+    easing: "easeInQuad"
+  }),
+  buildBallFollowsPathAnimation("#fifth-path","#ball-2",{ 
+    duration: 700,
+    easing: "cubicBezier(0, 0.42, 1, 0.58)"
+  }),
+  buildBallFollowsPathAnimation("#sixth-path","#ball-2",{ 
+    duration: 350,
+    easing: "cubicBezier(0, 0.42, 1, 0.58)"
+  }),
+  buildBallFollowsPathAnimation("#ninth-path","#ball-2",{ 
+    duration: 1000,
+    easing: "easeOutQuad"
+  }),
+]
+
+export const playSecondAnimationSequence = async (...args) => {
+  showElement("#ball-2")
+  showElement("#fourth-path")
+
+  const shows = [
+    () => showElement("#fifth-path"),
+    () => showElement("#sixth-path"),
+    () => showElement("#seventh-path"),
+    () => showElement("#eighth-path"),
+    undefined
+  ]
+
+  const curried = shows.map((s,i) => {
+    return () => {
+      s?.()
+      args?.[i]?.()
+    }
+  })
+
+  return playSequence(secondSequence,curried)
+}
+export const playThirdAnimationSequence = async (...args) => {
+  showElement("#ball-2")
+  showElement("#fourth-path")
+
+  const shows = [
+    () => showElement("#fifth-path"),
+    () => showElement("#sixth-path"),
+    () => showElement("#ninth-path"),
+    undefined
+  ]
+
+  const curried = shows.map((s,i) => {
+    return () => {
+      s?.()
+      args?.[i]?.()
+    }
+  })
+
+  return playSequence(thirdSequence,curried)
 }

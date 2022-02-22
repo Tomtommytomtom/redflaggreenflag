@@ -1,15 +1,16 @@
 <template>
- <div class="footer italic flex">
-   <div class="grow">
-     <div><span class="font-bold">RED</span> FLAGS</div>
-      <div><span class="font-bold">GREEN</span> FLAGS</div>
-   </div>
-  <div>icon</div>
-</div>
+  <div class="footer italic flex items-end">
+   <FlagSVGVue style="margin-bottom: -.75em; margin-left: 1.5em"/>
+  </div>
 </template>
 
 <script setup>
+import { onMounted } from "vue"
+import FlagSVGVue from './FlagSVG.vue';
 
+onMounted(() => {
+  const svg = document.getElementById("flag")
+});
 </script>
 
 <style lang="scss">

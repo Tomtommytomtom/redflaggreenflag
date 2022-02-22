@@ -1,0 +1,9 @@
+Always smells like <SMELL>
+Has the most attractive <BODY_PART> you've ever seen
+Looks exactly like <CELEBRITY>
+drives a <CAR>
+has a basement full of <BASEMENT>
+has the same favourite <FAVOURITES>
+is a professional <PROFESSION|HOBBY>
+knows everything about <TOPIC>
+volunteers for <CHARITY>

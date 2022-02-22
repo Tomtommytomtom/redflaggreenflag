@@ -1,13 +1,13 @@
-import perkRaw from "./assets/PERKS.txt?raw"
-import negativeRaw from "./assets/NEGATIVES.txt?raw"
+import positivesRaw from "./assets/GENERATED-POSITIVES.txt?raw"
+import negativesRaw from "./assets/GENERATED-NEGATIVES.txt?raw"
 
 const randomElement = (arr) => arr[Math.floor(Math.random() * arr.length)]
 
-const perks = perkRaw.split("\n")
-const negatives = negativeRaw.split("\n")
+const positives = positivesRaw.split("\n")
+const negatives = negativesRaw.split("\n")
 
 export const randomPerk = () => {
-  return randomElement(perks)
+  return randomElement(positives)
 }
 
 export const randomNegative = () => {
@@ -28,7 +28,7 @@ export const nRandomElements = (arr,n) => {
 }
 
 export const nRandomPerks = (n) => {
-  return nRandomElements(perks,n)
+  return nRandomElements(positives,n)
 }
 
 export const nRandomNegatives = (n) => {

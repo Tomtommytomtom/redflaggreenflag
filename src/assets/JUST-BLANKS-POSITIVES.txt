@@ -1,9 +1,9 @@
-Always smells like <SMELL>
+Always smells like <SMELLS>
 Has the most attractive <BODY_PART> you've ever seen
 Looks exactly like <CELEBRITY>
-drives a <CAR>
+drives a <CARS>
 has a basement full of <BASEMENT>
-has the same favourite <FAVOURITES>
-is a professional <PROFESSION|HOBBY>
+has the same favourite <FAVORITE>
+is a professional <PROFESSION>
 knows everything about <TOPIC>
-volunteers for <CHARITY>
+volunteers for <VOLUNTEERS>

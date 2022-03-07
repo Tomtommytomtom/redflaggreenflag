@@ -22,7 +22,7 @@
     "@tailwindcss/line-clamp": "^0.3.1",
     "@tailwindcss/typography": "^0.5.1",
     "@types/tailwindcss": "^3.0.7",
-    "@vitejs/plugin-vue": "^2.2.0",
+    "@vitejs/plugin-vue": "^2.2.4",
     "autoprefixer": "^10.4.2",
     "gh-pages": "^3.2.3",
     "prettier-plugin-tailwindcss": "^0.1.7",

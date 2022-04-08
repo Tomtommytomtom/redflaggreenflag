@@ -1,27 +1,12 @@
-
 <template>
 <div class="p-2 cont">
   <svg id="svg-overlay" class="svg-overlay absolute">
-    <!-- <circle id="ball" cx="50" cy="50" r="5" class="ball"/> -->
   </svg>
   <div id="outer-box" class="outer-box h-full w-full p-2 relative">
-    
     <Header/>
     <div class="grow-bottom-container">
-      <div class="flex inner-box">
-        <div class="w-1/2 flex flex-col pr-1">
-          <PerksColumn :perks="positives" :visible="visiblePositives" />
-          <span style="visibility:hidden;">AND</span>
-          <div class="flex">
-            <button @click="date" :disabled="disableButtons" class="box grow mr-1">DATE</button>
-            <button @click="next" :disabled="disableButtons" class="black-box grow">(NEXT)</button>
-          </div>
-        </div>
-        <div class="w-1/2 pl-1">
-          <PerksColumn style="visibility:hidden;" :visible="visiblePositives" :perks="positives" />
-          <NegativeColumn  :negatives="negatives" :visible="visibleNegatives"/>
-        </div>
-      </div>
+      <PerkBox v-if="isGame"/>
+      <Menu v-if="isMenu"/>
     </div>
     <Footer class="mt-16"/>
   </div>
@@ -29,91 +14,19 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
-import { nRandomPerks, nRandomNegatives } from "../utils"
-import PerksColumn from "@/components/PerksColumn.vue"
-import NegativeColumn from "@/components/NegativeColumn.vue"
+import { onMounted } from "vue"
+import { drawPaths } from "@/path"
+import { isGame, isMenu } from "@/state"
+
+import Menu from "@/components/Menu.vue"
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue"
-import { drawPaths, playFirstAnimationSequence, stopAllAnimationSequences, resetAllAnimationSequences, playSecondAnimationSequence, playThirdAnimationSequence } from "@/path"
-
-const disableButtons = ref(true)
-
-const positives = ref([])
-const negatives = ref([])
-
-
-const positiveCount = ref(2)
-const negativeCount = ref(1)
-
-
-const visiblePositives = ref([])
-const visibleNegatives = ref([])
-
-const reroll = () => {
-  positives.value = nRandomPerks(positiveCount.value)
-  negatives.value = nRandomNegatives(negativeCount.value)
-  visiblePositives.value = Array(positiveCount.value).fill(false)
-  visibleNegatives.value = Array(negativeCount.value).fill(false)
-}
-reroll()
-
-const secondBounce = () => {
-  visibleNegatives.value = visibleNegatives.value.map(() => true)
-}
-
-const firstBounce = () => {
-  visiblePositives.value = visiblePositives.value.map(() => true)
-}
-
-
-const play = () => {
-  playFirstAnimationSequence(firstBounce,secondBounce,() => { disableButtons.value = false })
-}
-
-const resetEverything = () => {
-  stopAllAnimationSequences()
-  resetAllAnimationSequences()
-  addListeners()
-}
-
-const next = () => {
-  disableButtons.value = true
-  const callbacks = Array()
-  callbacks[3] = () => {
-    resetEverything()
-    reroll()
-  }
-  playThirdAnimationSequence(...callbacks)
-}
-
-const date = () => {
-  disableButtons.value = true
-  const callbacks = Array()
-  callbacks[4] = () => {
-    resetEverything()
-    reroll()
-  }
-
-  playSecondAnimationSequence(...callbacks)
-}
-
-const firstClick = () => {
-  play()
-  window.removeEventListener("click",firstClick)
-  window.removeEventListener("touchstart",firstClick)
-}
-
-const addListeners = () => {
-  window.addEventListener("click",firstClick)
-  window.addEventListener("touchstart",firstClick)
-}
-addListeners()
-
+import PerkBox from "@/components/PerkBox.vue"
 
 onMounted(() => {
   drawPaths()
 })
+
 </script>
 
 <style>

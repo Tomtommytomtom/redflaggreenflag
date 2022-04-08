@@ -58,11 +58,7 @@
     ],
     "owns": [],
     "loves": [],
-    "thinks": [
-      "they're a Jedi",
-      "you're ugly",
-      "Twilight deserved an Oscar"
-    ]
+    "thinks": ["they're a Jedi", "you're ugly", "Twilight deserved an Oscar"]
   },
   "negatives": {
     "is": [
@@ -123,10 +119,6 @@
     ],
     "owns": [],
     "loves": [],
-    "thinks": [
-      "they're a Jedi",
-      "you're ugly",
-      "Twilight deserved an Oscar"
-    ]
+    "thinks": ["they're a Jedi", "you're ugly", "Twilight deserved an Oscar"]
   }
 }

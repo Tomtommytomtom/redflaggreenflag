@@ -1,6 +1,6 @@
 <template>
-  <div class="box italic flex items-center w-full">
-    {{visible ? props.text : ''}}
+  <div class="box flex w-full items-center italic">
+    {{ visible ? props.text : "" }}
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 const props = defineProps({
   text: String,
   visible: Boolean,
-})
+});
 </script>
 
 <style>

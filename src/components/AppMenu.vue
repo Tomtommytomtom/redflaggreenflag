@@ -1,11 +1,13 @@
 <template>
   <div class="flex">
-    <div>Anzahl</div>
-    <div>Add new</div>
-    <div>History</div>
+    <div><Card text="Number"/><Card/></div>
+    <div><Card text="Add"/><Card/></div>
+    <div><Card text="History"/></div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Card from './Card.vue';
+</script>
 
 <style></style>

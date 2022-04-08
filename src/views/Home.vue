@@ -20,7 +20,7 @@ import { isGame, isMenu } from "@/state";
 import Menu from "@/components/Menu.vue";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
-import PerkBox from "@/components/PerkBox.vue";
+import PerkBox from "@/components/Game.vue";
 
 onMounted(() => {
   drawPaths();

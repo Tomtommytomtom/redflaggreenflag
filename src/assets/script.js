@@ -7,18 +7,18 @@ const negatives = fs
   .split("\n");
 const positives = fs.readFileSync("./PERKS.txt").toString().trim().split("\n");
 
-patterns = {
+const patterns = {
   is: /^is\s(.*)/,
   owns: /^owns\s(.*)/,
   loves: /^loves\s(.*)/,
   thinks: /^thinks\s(.*)/,
 };
 
-const resultNegatives = Object.keys(patterns).reduce(
+Object.keys(patterns).reduce(
   (acc, curr) => ({ ...acc, [curr]: [] }),
   {}
 );
-const resultPositives = Object.keys(patterns).reduce(
+Object.keys(patterns).reduce(
   (acc, curr) => ({ ...acc, [curr]: [] }),
   {}
 );
@@ -45,23 +45,18 @@ const positiveResults = findMatches(negatives);
 
 const filterOutResults = (strings) => {
   const filtered = strings.filter((s) => {
-    for (const p of Object.values(patterns)) {
+    Object.values(patterns).forEach((p) => {
       if (p.test(s)) {
-        console.log(s, p, "should be filtered out");
         return false;
       }
-    }
+      return true
+    })
     return true;
   });
 
   filtered.push(...Object.keys(patterns).map((k) => `${k} ____`));
   return filtered;
 };
-
-// console.log(negativeResults);
-// console.log(positiveResults);
-
-console.log(filterOutResults(negatives));
 
 const blankJSON = {
   positives: positiveResults,

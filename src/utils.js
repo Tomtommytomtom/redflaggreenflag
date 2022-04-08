@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
 import positivesRaw from "./assets/GENERATED-POSITIVES.txt?raw";
+// eslint-disable-next-line import/no-unresolved
 import negativesRaw from "./assets/GENERATED-NEGATIVES.txt?raw";
 
 const randomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -12,13 +14,11 @@ export const randomNegative = () => randomElement(negatives);
 
 export const nRandomElements = (arr, n) => {
   const nSizeEmptyArray = Array.from([...Array(n).keys()]);
-  console.log(nSizeEmptyArray);
   return nSizeEmptyArray.map(() => {
     let random = randomElement(arr);
     while (nSizeEmptyArray.includes(random)) {
       random = randomElement(arr);
     }
-    console.log(random);
     return random;
   });
 };

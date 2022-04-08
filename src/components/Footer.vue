@@ -1,20 +1,15 @@
 <template>
   <div class="footer flex items-end justify-between italic">
     <FlagSVGVue style="margin-bottom: -0.75em; margin-left: 1.5em" />
-    <MenuSVG style="width: 2em" v-if="isGame" @click="changeToMenu" />
-    <button v-else @click="changeToGame">Back</button>
+    <MenuSVG style="width: 2em" v-if="isGame" />
+    <button v-else >Back</button>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import { changeToMenu, changeToGame, isGame } from "@/state";
+import { isGame } from "@/state";
 import FlagSVGVue from "./FlagSVG.vue";
 import MenuSVG from "./MenuSVG.vue";
-
-onMounted(() => {
-  const svg = document.getElementById("flag");
-});
 </script>
 
 <style lang="scss">

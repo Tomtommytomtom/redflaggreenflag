@@ -24,20 +24,22 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { nRandomPerks, nRandomNegatives } from "../utils";
+import { ref, onMounted } from "vue";
+import { nRandomPerks, nRandomNegatives } from "@/utils";
 import PerksColumn from "@/components/PerksColumn.vue";
 import NegativeColumn from "@/components/NegativeColumn.vue";
 import {
-  drawPaths,
   playFirstAnimationSequence,
   stopAllAnimationSequences,
   resetAllAnimationSequences,
   playSecondAnimationSequence,
   playThirdAnimationSequence,
+  drawPaths,
 } from "@/path";
 
 const disableButtons = ref(true);
+
+
 
 const positives = ref([]);
 const negatives = ref([]);
@@ -73,12 +75,13 @@ const play = () => {
 const resetEverything = () => {
   stopAllAnimationSequences();
   resetAllAnimationSequences();
+  // eslint-disable-next-line no-use-before-define
   addListeners();
 };
 
 const next = () => {
   disableButtons.value = true;
-  const callbacks = Array();
+  const callbacks = []
   callbacks[3] = () => {
     resetEverything();
     reroll();
@@ -88,7 +91,7 @@ const next = () => {
 
 const date = () => {
   disableButtons.value = true;
-  const callbacks = Array();
+  const callbacks = []
   callbacks[4] = () => {
     resetEverything();
     reroll();
@@ -99,6 +102,7 @@ const date = () => {
 
 const firstClick = () => {
   play();
+  // eslint-disable-next-line no-use-before-define
   removeListeners();
 };
 
@@ -112,7 +116,11 @@ const removeListeners = () => {
   window.removeEventListener("touchstart", firstClick);
 };
 
+onMounted(() => {
+  drawPaths()
+})
 addListeners();
+
 </script>
 
 <style></style>

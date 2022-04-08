@@ -1,5 +1,4 @@
-import anime from "animejs/lib/anime.es.js";
-import { dropShadow } from "tailwindcss/defaultTheme";
+import anime from "animejs/lib/anime.es";
 
 const drawBezierCurveArc = ({ a, b, c, svg, id }) => {
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -44,13 +43,13 @@ const buildWithOffset = (box, element) => {
   };
 };
 
-const placeFlag = () => {
+export const placeFlag = () => {
   const svg = document.getElementById("flag");
   const outerBoxRaw = document
     .getElementById("outer-box")
     .getBoundingClientRect();
   const lastNegativeBoxRaw = document
-    .getElementsByClassName("last-negative")[0]
+    .getElementsByClassName("grow-bottom-container")[0]
     .getBoundingClientRect();
 
   const outerBox = {
@@ -63,7 +62,6 @@ const placeFlag = () => {
 
   const height = outerBox.bottom - lastNegativeBox.bottom;
 
-  console.log(outerBox, lastNegativeBox, height, "HJGDFCVDUEY");
   svg.setAttributeNS(null, "height", height);
 };
 
@@ -76,9 +74,6 @@ const drawFirstAnimationPaths = () => {
     .getBoundingClientRect();
   const firstNegativeBoxRaw = document
     .getElementById("0-negative")
-    .getBoundingClientRect();
-  const lastNegativeBoxRaw = document
-    .getElementsByClassName("last-negative")[0]
     .getBoundingClientRect();
 
   const outerBox = {
@@ -293,9 +288,6 @@ const drawThirdAnimationPaths = () => {
   const outerBoxRaw = document
     .getElementById("outer-box")
     .getBoundingClientRect();
-  const lastNegativeBoxRaw = document
-    .getElementsByClassName("last-negative")[0]
-    .getBoundingClientRect();
 
   const flagRaw = document.getElementById("flag").getBoundingClientRect();
   const flag = buildWithOffset(outerBoxRaw, flagRaw);
@@ -306,7 +298,6 @@ const drawThirdAnimationPaths = () => {
     bottom: outerBoxRaw.bottom - outerBoxRaw.top,
     right: outerBoxRaw.right - outerBoxRaw.left,
   };
-  const lastNegativeBox = buildWithOffset(outerBoxRaw, lastNegativeBoxRaw);
 
   const bounceWidth = (4 / 7) * outerBoxRaw.width;
 
@@ -332,7 +323,7 @@ const drawThirdAnimationPaths = () => {
 };
 
 export const drawPaths = () => {
-  placeFlag();
+  // placeFlag();
   drawFirstAnimationPaths();
   drawSecondAnimationPaths();
   drawThirdAnimationPaths();
@@ -443,11 +434,12 @@ const firstSequence = [
 
 const playSequence = async (sequence, callbacks) => {
   const result = [];
-  for (let i = 0; i < sequence.length; i++) {
+  for (let i = 0; i < sequence.length; i += 1) {
     const animations = sequence[i]();
     result.push(...animations);
     const hook = callbacks[i];
 
+    // eslint-disable-next-line no-await-in-loop
     await Promise.all(animations.map((a) => a.finished));
     hook?.();
   }

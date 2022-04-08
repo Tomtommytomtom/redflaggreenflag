@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="italic">YOUR DATE</span>
-    <div v-for="(perk, index) in perks">
+    <div v-for="(perk, index) in perks" :key="index">
       <Card
         :text="perk"
         :id="`${index}-perk`"

@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { nRandomPerks, nRandomNegatives } from "@/utils";
 import PerksColumn from "@/components/PerksColumn.vue";
 import NegativeColumn from "@/components/NegativeColumn.vue";
@@ -119,6 +119,13 @@ const removeListeners = () => {
 onMounted(() => {
   drawPaths()
 })
+
+onUnmounted(() => {
+  stopAllAnimationSequences();
+  resetAllAnimationSequences();
+  removeListeners()
+})
+
 addListeners();
 
 </script>

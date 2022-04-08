@@ -57,8 +57,6 @@ const buildObject = (blanks) => {
 const positiveBlanks = buildObject(positiveBlanksRaw);
 const negativeBlanks = buildObject(negativeBlanksRaw);
 
-console.log(negativeBlanks);
-
 const templatePattern = /<(.*)>/;
 
 const replaceTemplateForValue = (str, value) => str.replace(templatePattern, value);
@@ -67,10 +65,8 @@ const fillInBlanks = (blanks, fillers) => {
   const result = [];
   blanks.forEach((templateString) => {
     const key = templateString.match(templatePattern)[1];
-    console.log(key);
     fillers[key]?.forEach((stringFiller) => {
       const toInsert = replaceTemplateForValue(templateString, stringFiller);
-      // console.log(toInsert);
       result.push(toInsert);
     });
   });
@@ -80,13 +76,9 @@ const fillInBlanks = (blanks, fillers) => {
 
 const generatedPositives = fillInBlanks(blankP, positiveBlanks);
 const generatedNegatives = fillInBlanks(blankN, negativeBlanks);
-console.log(generatedNegatives);
-console.log(generatedPositives);
 
 const allPositives = [...noBlankP.sort(), ...generatedPositives.sort()];
 const allNegatives = [...noBlankN.sort(), ...generatedNegatives.sort()];
-
-console.log(generatedPositives);
 
 fs.writeFileSync("./GENERATED-POSITIVES.txt", allPositives.join("\n").trim());
 fs.writeFileSync(

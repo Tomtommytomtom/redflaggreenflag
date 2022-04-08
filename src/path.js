@@ -33,15 +33,12 @@ const getMiddle = (pointA, pointB, offset) => ({
   y: pointA.y - offset,
 });
 
-const buildWithOffset = (box, element) => {
-  console.log(element.left, box.left);
-  return {
+const buildWithOffset = (box, element) => ({
     left: element.left - box.left,
     right: element.right - box.left,
     top: element.top - box.top,
     bottom: element.bottom - box.top,
-  };
-};
+  });
 
 export const placeFlag = () => {
   const svg = document.getElementById("flag");
@@ -87,8 +84,6 @@ const drawFirstAnimationPaths = () => {
 
   const boxLength = firstPerkBoxRaw.width;
 
-  console.log(outerBox.top);
-
   let distanceBetweenOuterboxAndFirstBox = Math.round(
     (firstPerkBox.top - outerBox.top) / 2
   );
@@ -97,13 +92,6 @@ const drawFirstAnimationPaths = () => {
     distanceBetweenOuterboxAndFirstBox = firstPerkBox.top - outerBox.top;
     startingPointY = outerBox.top;
   }
-
-  console.log(distanceBetweenOuterboxAndFirstBox, "CWUDYGVDE");
-
-  console.log(firstPerkBox);
-  console.log(firstNegativeBox);
-
-  // TODO: change constants with relative values to screen size
 
   const startingPoint = {
     x: Math.round(outerBox.left),
@@ -134,9 +122,6 @@ const drawFirstAnimationPaths = () => {
   );
 
   const thirdControlPoint = getMiddle(endingPoint, secondBouncingPoint, 0);
-
-  console.log(firstBouncingPoint);
-  console.log(secondBouncingPoint);
 
   const svg = document.getElementById("svg-overlay");
 
@@ -210,8 +195,6 @@ const drawSecondAnimationPaths = () => {
     x: outerBox.right - bounceWidth,
     y: outerBox.bottom - 5,
   };
-
-  console.log(flag);
 
   const flagHolePoint = {
     x: flag.left + flagRaw.width * 0.3,
@@ -336,7 +319,6 @@ const showElement = (qsl) => {
 
 const hideElement = (qsl) => {
   const el = document.querySelector(qsl);
-  console.log(el);
   el.style.opacity = 0;
 };
 

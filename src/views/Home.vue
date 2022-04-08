@@ -1,6 +1,6 @@
 
 <template>
-<div class="p-2">
+<div class="p-2 cont">
   <svg id="svg-overlay" class="svg-overlay absolute">
     <!-- <circle id="ball" cx="50" cy="50" r="5" class="ball"/> -->
   </svg>
@@ -143,7 +143,8 @@ onMounted(() => {
 .svg-overlay{
   position: absolute;
   height: 100%;
-  width: calc(100% - 20px);
+  width: calc(100% - 1rem);
+  max-width: calc(500px - 1rem);
 }
 
 .black-box {
@@ -152,6 +153,11 @@ onMounted(() => {
   padding: 2em 1em;
   font-size: 12px;
   height: calc(1.2em * 6 + 3em);
+}
+
+.cont{
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 </style>

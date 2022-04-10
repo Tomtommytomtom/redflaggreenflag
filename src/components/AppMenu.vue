@@ -1,13 +1,28 @@
 <template>
-  <div class="flex">
-    <div><Card text="Number" /><Card /></div>
-    <div><Card text="Add" /><Card /></div>
-    <div><Card text="History" /></div>
+  <div class="grid grid-cols-2 gap-2">
+    <MenuCard>Change Amounts</MenuCard>
+    <div class="grid grid-cols-2 gap-1">
+      <NumberPickerButton v-model="positiveCount" />
+      <NumberPickerButton v-model="negativeCount" isBlack>
+        <template #default="{ value }"> ({{ value }}) </template>
+      </NumberPickerButton>
+    </div>
+    <MenuCard>Add Cards</MenuCard>
+    <div class="grid grid-cols-2 gap-1">
+      <MenuCard>Green</MenuCard>
+      <MenuCard isBlack>(Red)</MenuCard>
+    </div>
+    <div>
+      <!-- Empty -->
+    </div>
+    <MenuCard isBlack>History</MenuCard>
   </div>
 </template>
 
 <script setup>
-import Card from "./Card.vue";
+import { positiveCount, negativeCount } from "@/state";
+import MenuCard from "./MenuCard.vue";
+import NumberPickerButton from "./NumberPickerButton.vue";
 </script>
 
 <style></style>

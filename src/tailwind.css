@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .box {
+    border: 1px solid black;
+    padding: theme(spacing.8) theme(spacing.4);
+    font-size: 12px;
+    height: calc(1.2em * 6 + 3em);
+    background-color: white;
+  }
+  /* ... */
+}

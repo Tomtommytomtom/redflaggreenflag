@@ -26,6 +26,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { nRandomPerks, nRandomNegatives } from "@/utils";
+import { positiveCount, negativeCount } from "@/state";
 import PerksColumn from "@/components/PerksColumn.vue";
 import NegativeColumn from "@/components/NegativeColumn.vue";
 import {
@@ -42,8 +43,8 @@ const disableButtons = ref(true);
 const positives = ref([]);
 const negatives = ref([]);
 
-const positiveCount = ref(2);
-const negativeCount = ref(1);
+// const positiveCount = ref(2);
+// const negativeCount = ref(1);
 
 const visiblePositives = ref([]);
 const visibleNegatives = ref([]);

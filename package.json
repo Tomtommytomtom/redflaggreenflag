@@ -8,16 +8,16 @@
     "serve": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "format": "npx eslint --fix --ext .js,.jsx,.vue && npx prettier --write ."
+    "format": "npx eslint --fix --ext .js,.jsx,.vue ./src && npx prettier --write ."
   },
   "dependencies": {
     "animejs": "^3.2.1",
     "vue": "^3.2.31",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "@heroicons/vue": "^1.0.5"
   },
   "devDependencies": {
     "@headlessui/vue": "^1.4.3",
-    "@heroicons/vue": "^1.0.5",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/line-clamp": "^0.3.1",

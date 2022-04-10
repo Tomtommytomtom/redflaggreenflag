@@ -1,21 +1,24 @@
 <template>
-  <div class="box flex w-full items-center italic">
-    {{ visible ? props.text : "" }}
+  <div
+    class="box flex w-full items-center italic"
+    :class="{ 'black-box': isBlack }"
+  >
+    <slot />
   </div>
 </template>
 
 <script setup>
-const props = defineProps({
-  text: String,
-  visible: Boolean,
+defineProps({
+  isBlack: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
 <style>
-.box {
-  border: 1px solid black;
-  padding: 2em 1em;
-  font-size: 12px;
-  height: calc(1.2em * 6 + 3em);
+.black-box {
+  background-color: black;
+  color: white;
 }
 </style>

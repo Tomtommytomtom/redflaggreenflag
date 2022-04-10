@@ -54,14 +54,6 @@ onMounted(() => {
   max-width: calc(500px - 1rem);
 }
 
-.black-box {
-  background-color: black;
-  color: white;
-  padding: 2em 1em;
-  font-size: 12px;
-  height: calc(1.2em * 6 + 3em);
-}
-
 .cont {
   max-width: 500px;
   margin: 0 auto;

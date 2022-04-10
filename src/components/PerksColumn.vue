@@ -2,11 +2,9 @@
   <div>
     <span class="italic">YOUR DATE</span>
     <div v-for="(perk, index) in perks" :key="index">
-      <Card
-        :text="perk"
-        :id="`${index}-perk`"
-        :visible="props.visible[index]"
-      />
+      <Card :id="`${index}-perk`">
+        {{ props.visible[index] ? perk : "" }}
+      </Card>
       <span class="italic" v-if="index !== perks.length - 1">AND</span>
     </div>
   </div>

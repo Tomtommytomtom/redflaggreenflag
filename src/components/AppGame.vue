@@ -4,10 +4,10 @@
       <PerksColumn :perks="positives" :visible="visiblePositives" />
       <span style="visibility: hidden">AND</span>
       <div class="flex">
-        <button @click="date" :disabled="disableButtons" class="box mr-1 grow">
+        <button @click="date" :disabled="disableButtons" class="box mr-1 basis-1/2">
           DATE
         </button>
-        <button @click="next" :disabled="disableButtons" class="black-box grow">
+        <button @click="next" :disabled="disableButtons" class="box black-box basis-1/2">
           (NEXT)
         </button>
       </div>

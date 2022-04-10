@@ -356,6 +356,9 @@ export const removePaths = () => {
   allTargets.forEach((id) => {
     document.querySelector(id).remove()
   })
+  //reset height of overlay
+  const svg = document.getElementById("svg-overlay");
+  svg.style.height = '1px';
 }
 
 export const resetFirstAnimationSequence = () => {

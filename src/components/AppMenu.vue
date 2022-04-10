@@ -1,5 +1,8 @@
 <template>
-  <div class="grid grid-cols-2 gap-2">
+  <div class="grid grid-cols-2 gap-2 relative">
+    <div class="absolute under-construction flex items-center justify-center text-4xl">
+      COMING SOON
+    </div>
     <MenuCard>Change Amounts</MenuCard>
     <div class="grid grid-cols-2 gap-1">
       <NumberPickerButton v-model="positiveCount" />

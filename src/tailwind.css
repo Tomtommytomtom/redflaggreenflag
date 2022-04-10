@@ -11,4 +11,14 @@
     background-color: white;
   }
   /* ... */
+  .under-construction {
+    background-color: white;
+    color: gray;
+    opacity: 0.7;
+    z-index: 999;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(2 * 16vh + 0.5rem + 3px);
+    top: calc(16vh + 0.5rem - 2px)
+  }
 }

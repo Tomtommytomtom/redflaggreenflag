@@ -7,8 +7,7 @@ import { routes } from "./routes";
 const app = createApp(App);
 
 const router = createRouter({
-  history: createWebHistory(),
-  base: '/redflaggreenflag',
+  history: createWebHistory('/redflaggreenflag'),
   routes,
 });
 

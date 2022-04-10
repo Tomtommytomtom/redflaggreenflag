@@ -82,11 +82,14 @@ const drawFirstAnimationPaths = () => {
   const firstPerkBox = buildWithOffset(outerBoxRaw, firstPerkBoxRaw);
   const firstNegativeBox = buildWithOffset(outerBoxRaw, firstNegativeBoxRaw);
 
+  console.log(outerBox, firstPerkBox, firstNegativeBox)
+
   const boxLength = firstPerkBoxRaw.width;
 
   let distanceBetweenOuterboxAndFirstBox = Math.round(
     (firstPerkBox.top - outerBox.top) / 2
   );
+
   let startingPointY = outerBox.top + distanceBetweenOuterboxAndFirstBox;
   if (distanceBetweenOuterboxAndFirstBox < firstPerkBoxRaw.height) {
     distanceBetweenOuterboxAndFirstBox = firstPerkBox.top - outerBox.top;
@@ -107,7 +110,7 @@ const drawFirstAnimationPaths = () => {
     x: Math.round(firstNegativeBox.right - (boxLength * 1) / 3),
     y: Math.round(firstNegativeBox.top),
   };
-
+  
   const endingPoint = {
     x: Math.round(outerBox.right + 20),
     y: Math.round(secondBouncingPoint.y - 80),
@@ -118,7 +121,7 @@ const drawFirstAnimationPaths = () => {
   const secondControlPoint = getMiddle(
     firstBouncingPoint,
     secondBouncingPoint,
-    distanceBetweenOuterboxAndFirstBox
+    firstPerkBoxRaw.height * 1.8
   );
 
   const thirdControlPoint = getMiddle(endingPoint, secondBouncingPoint, 0);
@@ -312,6 +315,8 @@ export const drawPaths = () => {
   drawThirdAnimationPaths();
 };
 
+
+
 const showElement = (qsl) => {
   const el = document.querySelector(qsl);
   el.style.opacity = 1;
@@ -345,6 +350,13 @@ const THIRD_SEQUENCE_TARGETS = [
   "#ninth-path",
   "#ball-2",
 ];
+
+export const removePaths = () => {
+  const allTargets = [...FIRST_SEQUENCE_TARGETS,SECOND_SEQUENCE_TARGETS,THIRD_SEQUENCE_TARGETS]
+  allTargets.forEach((id) => {
+    document.querySelector(id).remove()
+  })
+}
 
 export const resetFirstAnimationSequence = () => {
   FIRST_SEQUENCE_TARGETS.forEach(hideElement);

@@ -36,7 +36,8 @@ import {
   playSecondAnimationSequence,
   playThirdAnimationSequence,
   drawPaths,
-} from "@/path";
+  removePaths,
+  } from "@/path";
 
 const disableButtons = ref(true);
 
@@ -123,6 +124,7 @@ onUnmounted(() => {
   stopAllAnimationSequences();
   resetAllAnimationSequences();
   removeListeners();
+  removePaths();
 });
 
 addListeners();

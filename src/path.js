@@ -34,11 +34,11 @@ const getMiddle = (pointA, pointB, offset) => ({
 });
 
 const buildWithOffset = (box, element) => ({
-    left: element.left - box.left,
-    right: element.right - box.left,
-    top: element.top - box.top,
-    bottom: element.bottom - box.top,
-  });
+  left: element.left - box.left,
+  right: element.right - box.left,
+  top: element.top - box.top,
+  bottom: element.bottom - box.top,
+});
 
 export const placeFlag = () => {
   const svg = document.getElementById("flag");

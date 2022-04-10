@@ -14,14 +14,8 @@ const patterns = {
   thinks: /^thinks\s(.*)/,
 };
 
-Object.keys(patterns).reduce(
-  (acc, curr) => ({ ...acc, [curr]: [] }),
-  {}
-);
-Object.keys(patterns).reduce(
-  (acc, curr) => ({ ...acc, [curr]: [] }),
-  {}
-);
+Object.keys(patterns).reduce((acc, curr) => ({ ...acc, [curr]: [] }), {});
+Object.keys(patterns).reduce((acc, curr) => ({ ...acc, [curr]: [] }), {});
 
 const findMatches = (strings) => {
   const results = Object.keys(patterns).reduce(
@@ -49,8 +43,8 @@ const filterOutResults = (strings) => {
       if (p.test(s)) {
         return false;
       }
-      return true
-    })
+      return true;
+    });
     return true;
   });
 

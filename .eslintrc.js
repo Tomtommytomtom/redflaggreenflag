@@ -2,10 +2,14 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    'vue/setup-compiler-macros': true
+    "vue/setup-compiler-macros": true,
   },
-  extends: ["plugin:vue/essential",
-  "plugin:import/recommended", "airbnb-base", "prettier"],
+  extends: [
+    "plugin:vue/essential",
+    "plugin:import/recommended",
+    "airbnb-base",
+    "prettier",
+  ],
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
@@ -13,11 +17,9 @@ module.exports = {
   plugins: ["vue"],
   rules: {},
   settings: {
-    'import/resolver': {
+    "import/resolver": {
       alias: {
-        map: [
-          ['@', './src'],
-        ],
+        map: [["@", "./src"]],
       },
     },
   },

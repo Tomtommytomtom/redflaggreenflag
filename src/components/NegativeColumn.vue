@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="italic">(BUT)</span>
-    <div v-for="(perk, index) in negatives" :key="index" >
+    <div v-for="(perk, index) in negatives" :key="index">
       <Card
         class="black-box"
         :text="perk"

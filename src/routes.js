@@ -1,5 +1,5 @@
 import Game from "./components/AppGame.vue";
-import Menu from "./components/AppMenu.vue"
+import Menu from "./components/AppMenu.vue";
 
 /** @type {import('vue-router').RouterOptions['routes']} */
 // eslint-disable-next-line import/prefer-default-export

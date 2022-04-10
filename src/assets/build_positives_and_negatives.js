@@ -59,7 +59,8 @@ const negativeBlanks = buildObject(negativeBlanksRaw);
 
 const templatePattern = /<(.*)>/;
 
-const replaceTemplateForValue = (str, value) => str.replace(templatePattern, value);
+const replaceTemplateForValue = (str, value) =>
+  str.replace(templatePattern, value);
 
 const fillInBlanks = (blanks, fillers) => {
   const result = [];

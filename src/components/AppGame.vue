@@ -39,8 +39,6 @@ import {
 
 const disableButtons = ref(true);
 
-
-
 const positives = ref([]);
 const negatives = ref([]);
 
@@ -81,7 +79,7 @@ const resetEverything = () => {
 
 const next = () => {
   disableButtons.value = true;
-  const callbacks = []
+  const callbacks = [];
   callbacks[3] = () => {
     resetEverything();
     reroll();
@@ -91,7 +89,7 @@ const next = () => {
 
 const date = () => {
   disableButtons.value = true;
-  const callbacks = []
+  const callbacks = [];
   callbacks[4] = () => {
     resetEverything();
     reroll();
@@ -117,17 +115,16 @@ const removeListeners = () => {
 };
 
 onMounted(() => {
-  drawPaths()
-})
+  drawPaths();
+});
 
 onUnmounted(() => {
   stopAllAnimationSequences();
   resetAllAnimationSequences();
-  removeListeners()
-})
+  removeListeners();
+});
 
 addListeners();
-
 </script>
 
 <style></style>

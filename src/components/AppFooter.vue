@@ -2,7 +2,7 @@
   <div class="footer flex items-end justify-between italic">
     <FlagSVGVue style="margin-bottom: -0.75em; margin-left: 1.5em" />
     <RouterLink v-if="isGame" to="/menu">
-      <MenuSVG style="width: 2em"/>
+      <MenuSVG style="width: 2em" />
     </RouterLink>
     <RouterLink v-else to="/">
       <button>Back</button>

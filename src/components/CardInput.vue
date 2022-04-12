@@ -15,12 +15,22 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import Card from "./Card.vue"
 
-const text = ref("")
 const input = ref()
 const maxWidth = ref()
+
+const props = defineProps({
+  modelValue: String
+})
+
+const emit = defineEmits(["update:modelValue"])
+
+const text = computed({
+  get: () => props.modelValue,
+  set: (newValue) => emit("update:modelValue",newValue)
+})
 
 const measureMaxWidth = () => {
   const card = document.getElementById("textarea-container-card")
@@ -30,9 +40,11 @@ const measureMaxWidth = () => {
 }
 
 const testTextWidth = (text) => {
-  var c = document.createElement("canvas");
-  var ctx = c.getContext("2d");
+  const c = document.createElement("canvas");
+  const ctx = c.getContext("2d");
   ctx.font = "12px Inter var";
+  console.log(ctx.measureText(text).width);
+  
   return Math.ceil(ctx.measureText(text).width)
 }
 
@@ -42,7 +54,7 @@ onMounted(() => {
 
 const resizeInput = () => {
   const textWidth = testTextWidth(input.value.value)
-  let rows = Math.floor(textWidth / maxWidth.value) + 1
+  let rows = Math.floor(textWidth / (maxWidth.value + 10)) + 1
   if(rows >= 3){
     rows = 3
   }
@@ -65,6 +77,7 @@ const resizeInput = () => {
   height: fit-content;
   vertical-align: middle;
   overflow-y: hidden;
+  overflow-x: hidden;
   background-color: inherit;
   color: inherit;  
 }

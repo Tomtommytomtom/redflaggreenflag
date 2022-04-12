@@ -35,9 +35,4 @@ const value = computed({
 </script>
 
 <style lang="scss" scoped>
-.no-styles-button {
-  background-color: inherit;
-  width: 100%;
-  height: 100%;
-}
 </style>

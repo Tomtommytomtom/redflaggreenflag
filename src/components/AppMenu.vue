@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-cols-2 gap-2 relative">
-    <div class="absolute under-construction flex items-center justify-center text-4xl">
+    <!-- <div class="absolute under-construction flex items-center justify-center text-4xl">
       COMING SOON
-    </div>
+    </div> -->
     <MenuCard>Change Amounts</MenuCard>
     <div class="grid grid-cols-2 gap-1">
       <NumberPickerButton v-model="positiveCount" />
@@ -12,8 +12,12 @@
     </div>
     <MenuCard>Add Cards</MenuCard>
     <div class="grid grid-cols-2 gap-1">
-      <MenuCard>Green</MenuCard>
-      <MenuCard isBlack>(Red)</MenuCard>
+      <RouterLink to="/add/green">
+        <MenuCard>Green</MenuCard>
+      </RouterLink>
+      <RouterLink to="/add/green">
+        <MenuCard isBlack>(Red)</MenuCard>
+      </RouterLink>
     </div>
     <div>
       <!-- Empty -->
@@ -24,6 +28,7 @@
 
 <script setup>
 import { positiveCount, negativeCount } from "@/state";
+import { RouterLink } from "vue-router"
 import MenuCard from "./MenuCard.vue";
 import NumberPickerButton from "./NumberPickerButton.vue";
 </script>

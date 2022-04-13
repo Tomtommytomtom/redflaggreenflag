@@ -24,10 +24,11 @@ defineProps({
   }
 })
 
-defineEmits(["click:remove"])
+const emit = defineEmits(["click:remove"])
 
 const clickRemove = () => {
   console.log("clicked remove")
+  emit("click:remove")
 }
 </script>
 

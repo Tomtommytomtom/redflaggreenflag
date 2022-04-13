@@ -1,16 +1,20 @@
 <template>
   <div class="header italic">
-    <div><span class="font-bold">RED</span> FLAGS</div>
-    <div><span class="font-bold">GREEN</span> FLAGS</div>
+    <span class="white-bg"><span class="font-bold">RED</span> FLAGS</span><br>
+    <span class="white-bg"><span class="font-bold">GREEN</span> FLAGS</span>
   </div>
 </template>
 
 <script setup></script>
 
-<style>
+<style scoped>
 .header {
   font-size: 2rem;
   line-height: 2rem;
   width: 100%;
+}
+
+.white-bg{
+  background-color: white;
 }
 </style>

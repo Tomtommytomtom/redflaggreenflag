@@ -135,7 +135,7 @@ const removeListeners = () => {
 };
 
 onMounted(() => {
-  console.log('in game');
+  
   drawPaths();
 });
 

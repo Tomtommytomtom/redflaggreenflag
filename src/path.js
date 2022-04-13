@@ -60,7 +60,7 @@ const drawFirstAnimationPaths = () => {
   const firstPerkBox = buildWithOffset(outerBoxRaw, firstPerkBoxRaw);
   const firstNegativeBox = buildWithOffset(outerBoxRaw, firstNegativeBoxRaw);
 
-  console.log(outerBox, firstPerkBox, firstNegativeBox)
+  
 
   const boxLength = firstPerkBoxRaw.width;
 

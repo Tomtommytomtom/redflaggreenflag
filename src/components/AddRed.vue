@@ -15,13 +15,13 @@ import BaseContainer from './BaseContainer.vue';
 
 
 const addHandler = (text) => {
-  console.log("adding negative");
+  
   
   addCustomNegative(text)
 }
 
 const removeHandler = (text) => {
-  console.log("removing", text);
+  
   removeNegative(text)
 }
 </script>

@@ -43,7 +43,7 @@ const testTextWidth = (text) => {
   const c = document.createElement("canvas");
   const ctx = c.getContext("2d");
   ctx.font = "12px Inter var";
-  console.log(ctx.measureText(text).width);
+  
   
   return Math.ceil(ctx.measureText(text).width)
 }

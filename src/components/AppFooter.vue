@@ -22,7 +22,7 @@ const goBack = () => router.go(-1)
 
 const route = useRoute();
 
-console.log(route.path);
+
 
 const isRoot = computed(() => route.path === "/");
 </script>

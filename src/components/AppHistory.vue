@@ -26,7 +26,7 @@
 <script setup>
 import BaseContainer from './BaseContainer.vue';
 import { history } from '@/history';
-console.log(history.value);
+
 
 import Card from './Card.vue';
 </script>

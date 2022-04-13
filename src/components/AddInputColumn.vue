@@ -27,7 +27,7 @@ defineProps({
 const input = ref("")
 
 const add = () => {
-  console.log('clicked',input.value);
+  
   
   emit('add',input.value)
 }

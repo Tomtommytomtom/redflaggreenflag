@@ -1,29 +1,30 @@
 <template>
 <BaseContainer class="mt-12">
   <div class="grid grid-cols-1 gap-4">
-    <AddInputColumn  @add="addHandler" isBlack/>
-    <AddColumn isBlack v-for="red in negativesFromLocalStorageRef" @click:remove="removeHandler">{{red}}</AddColumn>
+    <AddInputColumn @add="addHandler"/>
+    <AddColumn v-for="positive in positivesFromLocalStorageRef" @click:remove="removeHandler">{{positive}}</AddColumn>
   </div>
 </BaseContainer>
 </template>
 
 <script lang="ts" setup>
-import { negativesFromLocalStorageRef, addCustomNegative, removeNegative } from '@/utils';
+import { positivesFromLocalStorageRef, addCustomPositive, removePositive } from '@/utils';
 import AddInputColumn from './AddInputColumn.vue';
 import AddColumn from './AddColumn.vue';
 import BaseContainer from './BaseContainer.vue';
 
 
 const addHandler = (text) => {
-  console.log("adding negative");
+  console.log("adding positve", text);
   
-  addCustomNegative(text)
+  addCustomPositive(text)
 }
 
 const removeHandler = (text) => {
   console.log("removing", text);
-  removeNegative(text)
+  removePositive(text)
 }
+
 </script>
 
 <style lang="scss">

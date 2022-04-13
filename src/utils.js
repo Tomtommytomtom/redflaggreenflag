@@ -15,9 +15,26 @@ export const addCustomPositive = (newPositive) => {
 
 export const addCustomNegative = (newNegative) => {
   negativesFromLocalStorageRef.value.unshift(newNegative)
-  localStorage.setItem("negatives",JSON.stringify(positivesFromLocalStorageRef.value))
+  localStorage.setItem("negatives",JSON.stringify(negativesFromLocalStorageRef.value))
 }
 
+export const removePositive = (positive) => {
+  const index = positivesFromLocalStorageRef.value.indexOf(positive)
+  if(index === -1){
+    return
+  }
+  positivesFromLocalStorageRef.value.splice(index,1)
+  localStorage.setItem("positives",JSON.stringify(positivesFromLocalStorageRef.value))
+}
+
+export const removeNegative = (negative) => {
+  const index = negativesFromLocalStorageRef.value.indexOf(negative)
+  if(index === -1){
+    return
+  }
+  negativesFromLocalStorageRef.value.splice(index,1)
+  localStorage.setItem("negatives",JSON.stringify(negativesFromLocalStorageRef.value))
+}
 
 const staticPositives = positivesRaw.split("\n")
 const staticNegatives = negativesRaw.split("\n")

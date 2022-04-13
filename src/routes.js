@@ -1,6 +1,6 @@
 import Game from "./components/AppGame.vue";
 import Menu from "./components/AppMenu.vue";
-import AddGreen from "./components/AddInputColumn.vue"
+import AddGreen from "./components/AddGreen.vue"
 import AddRed from "./components/AddRed.vue"
 
 /** @type {import('vue-router').RouterOptions['routes']} */

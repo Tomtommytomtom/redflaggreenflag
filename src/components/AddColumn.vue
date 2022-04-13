@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-2 gap-2">
-    <Card>
+    <Card :isBlack="isBlack">
       <slot/>
     </Card>
     <div class="grid grid-cols-2 gap-2">
@@ -16,6 +16,15 @@
 import { XIcon } from "@heroicons/vue/outline";
 import CardButton from "./CardButton.vue"
 import Card from "./Card.vue"
+
+defineProps({
+  isBlack: {
+    type: Boolean,
+    default: false
+  }
+})
+
+defineEmits(["click:remove"])
 
 const clickRemove = () => {
   console.log("clicked remove")

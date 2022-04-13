@@ -1,6 +1,6 @@
 <template>
-<BaseContainer>
-  <div class="grid grid-cols-2 gap-2 mb-2" v-for="match in history" >
+<BaseContainer class="pt-4">
+  <div class="grid grid-cols-2 gap-2 mb-4" v-for="match in history" >
     <Card class="p-2 scrollable">
       <div>
         <span class="font-bold">YOUR DATE&nbsp;</span>

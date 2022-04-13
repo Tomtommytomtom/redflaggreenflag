@@ -8,7 +8,7 @@
         {{ value }}
       </slot>
     </div>
-    <button class="no-styles-button basis-1/4" @click="value--">
+    <button :disabled="value === 1" class="no-styles-button basis-1/4" @click="value--">
       <ChevronDownIcon class="m-auto h-6" />
     </button>
   </Card>
@@ -35,4 +35,7 @@ const value = computed({
 </script>
 
 <style lang="scss" scoped>
+button:disabled{
+  opacity: 0.2;
+}
 </style>

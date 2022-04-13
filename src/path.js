@@ -106,7 +106,7 @@ const drawFirstAnimationPaths = () => {
 
   const svg = document.getElementById("svg-overlay");
 
-  svg.style.height = outerBoxRaw.height;
+  svg.style.height = outerBoxRaw.height + 'px';
 
   drawBezierCurveArc({
     a: startingPoint,
@@ -174,12 +174,12 @@ const drawSecondAnimationPaths = () => {
 
   const lastBouncingPoint = {
     x: outerBox.right - bounceWidth,
-    y: outerBox.bottom - 5,
+    y: outerBox.bottom - 7,
   };
 
   const flagHolePoint = {
     x: flag.left + flagRaw.width * 0.3,
-    y: outerBox.bottom - 5,
+    y: outerBox.bottom - 7,
   };
 
   const inTheGround = {
@@ -267,14 +267,14 @@ const drawThirdAnimationPaths = () => {
 
   const lastBouncingPoint = {
     x: outerBox.right - bounceWidth,
-    y: outerBox.bottom - 5,
+    y: outerBox.bottom - 7,
   };
 
   const distanceLastBouncingPointAndFlag = lastBouncingPoint.x - flag.left;
 
   const halfwayToFlag = {
     x: flag.left + distanceLastBouncingPointAndFlag / 2,
-    y: outerBox.bottom - 5,
+    y: outerBox.bottom - 7,
   };
 
   drawBezierCurveArc({
@@ -329,9 +329,10 @@ const THIRD_SEQUENCE_TARGETS = [
 ];
 
 export const removePaths = () => {
-  const allTargets = [...FIRST_SEQUENCE_TARGETS,SECOND_SEQUENCE_TARGETS,THIRD_SEQUENCE_TARGETS]
+  const allTargets = [...FIRST_SEQUENCE_TARGETS,...SECOND_SEQUENCE_TARGETS,...THIRD_SEQUENCE_TARGETS]
   allTargets.forEach((id) => {
-    document.querySelector(id).remove()
+    console.log('removing',id);
+    document.querySelector(id)?.remove()
   })
   // reset height of overlay
   const svg = document.getElementById("svg-overlay");

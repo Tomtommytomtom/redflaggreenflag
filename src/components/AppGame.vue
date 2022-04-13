@@ -40,8 +40,8 @@ import {
   drawPaths,
   removePaths,
   } from "@/path";
-import BaseContainer from "./BaseContainer.vue";
 import { addToHistory } from "@/history";
+import BaseContainer from "./BaseContainer.vue";
 
 const disableButtons = ref(true);
 

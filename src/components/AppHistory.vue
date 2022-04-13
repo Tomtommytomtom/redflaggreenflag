@@ -24,8 +24,8 @@
 </template>
 
 <script setup>
-import BaseContainer from './BaseContainer.vue';
 import { history } from '@/history';
+import BaseContainer from './BaseContainer.vue';
 
 
 import Card from './Card.vue';

@@ -10,11 +10,10 @@
 
 <script setup>
 import { computed } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { RouterLink, useRoute , useRouter } from "vue-router";
 import { ChevronLeftIcon } from "@heroicons/vue/outline";
 import FlagSVGVue from "./FlagSVG.vue";
 import MenuSVG from "./MenuSVG.vue";
-import { useRouter } from "vue-router"
 
 const router = useRouter()
 

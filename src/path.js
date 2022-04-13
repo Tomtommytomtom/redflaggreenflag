@@ -106,7 +106,7 @@ const drawFirstAnimationPaths = () => {
 
   const svg = document.getElementById("svg-overlay");
 
-  svg.style.height = outerBoxRaw.height + 'px';
+  svg.style.height = `${outerBoxRaw.height  }px`;
 
   drawBezierCurveArc({
     a: startingPoint,

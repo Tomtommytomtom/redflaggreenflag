@@ -1,4 +1,5 @@
 <template>
+<BaseContainer class="justify-end">
   <div class="flex">
     <div class="flex w-1/2 flex-col pr-1">
       <PerksColumn :perks="positives" :visible="visiblePositives" />
@@ -21,6 +22,7 @@
       <NegativeColumn :negatives="negatives" :visible="visibleNegatives" />
     </div>
   </div>
+</BaseContainer>
 </template>
 
 <script setup>
@@ -38,6 +40,7 @@ import {
   drawPaths,
   removePaths,
   } from "@/path";
+import BaseContainer from "./BaseContainer.vue";
 
 const disableButtons = ref(true);
 
@@ -117,6 +120,7 @@ const removeListeners = () => {
 };
 
 onMounted(() => {
+  console.log('in game');
   drawPaths();
 });
 

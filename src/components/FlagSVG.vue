@@ -1,7 +1,7 @@
 <template>
   <svg
     id="flag"
-    height="1"
+    height="12vh"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 172.2 276.22"
   >

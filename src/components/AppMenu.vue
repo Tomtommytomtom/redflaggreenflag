@@ -1,4 +1,5 @@
 <template>
+<BaseContainer class="justify-center">
   <div class="grid grid-cols-2 gap-2 relative">
     <!-- <div class="absolute under-construction flex items-center justify-center text-4xl">
       COMING SOON
@@ -15,7 +16,7 @@
       <RouterLink to="/add/green">
         <MenuCard>Green</MenuCard>
       </RouterLink>
-      <RouterLink to="/add/green">
+      <RouterLink to="/add/red">
         <MenuCard isBlack>(Red)</MenuCard>
       </RouterLink>
     </div>
@@ -24,6 +25,7 @@
     </div>
     <MenuCard isBlack>History</MenuCard>
   </div>
+</BaseContainer>
 </template>
 
 <script setup>
@@ -31,6 +33,7 @@ import { positiveCount, negativeCount } from "@/state";
 import { RouterLink } from "vue-router"
 import MenuCard from "./MenuCard.vue";
 import NumberPickerButton from "./NumberPickerButton.vue";
+import BaseContainer from "./BaseContainer.vue";
 </script>
 
 <style></style>

@@ -40,28 +40,6 @@ const buildWithOffset = (box, element) => ({
   bottom: element.bottom - box.top,
 });
 
-export const placeFlag = () => {
-  const svg = document.getElementById("flag");
-  const outerBoxRaw = document
-    .getElementById("outer-box")
-    .getBoundingClientRect();
-  const lastNegativeBoxRaw = document
-    .getElementsByClassName("grow-bottom-container")[0]
-    .getBoundingClientRect();
-
-  const outerBox = {
-    left: 0,
-    top: 0,
-    bottom: outerBoxRaw.bottom - outerBoxRaw.top,
-    right: outerBoxRaw.right - outerBoxRaw.left,
-  };
-  const lastNegativeBox = buildWithOffset(outerBoxRaw, lastNegativeBoxRaw);
-
-  const height = outerBox.bottom - lastNegativeBox.bottom;
-
-  svg.setAttributeNS(null, "height", height);
-};
-
 const drawFirstAnimationPaths = () => {
   const outerBoxRaw = document
     .getElementById("outer-box")
@@ -309,7 +287,6 @@ const drawThirdAnimationPaths = () => {
 };
 
 export const drawPaths = () => {
-  // placeFlag();
   drawFirstAnimationPaths();
   drawSecondAnimationPaths();
   drawThirdAnimationPaths();

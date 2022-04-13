@@ -3,24 +3,15 @@
     <svg id="svg-overlay" class="svg-overlay absolute"></svg>
     <div id="outer-box" class="outer-box relative h-full w-full p-2">
       <Header />
-      <div class="grow-bottom-container">
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
       <Footer class="mt-16" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import { placeFlag } from "@/path";
-
 import Header from "@/components/AppHeader.vue";
 import Footer from "@/components/AppFooter.vue";
-
-onMounted(() => {
-  placeFlag();
-});
 </script>
 
 <style>
@@ -40,11 +31,11 @@ onMounted(() => {
   flex-direction: column;
 }
 
-.grow-bottom-container {
+.grow-container {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 }
 
 .svg-overlay {

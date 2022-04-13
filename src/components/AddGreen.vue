@@ -2,7 +2,7 @@
 <BaseContainer class="mt-12">
   <div class="grid grid-cols-1 gap-4">
     <AddInputColumn @add="addHandler"/>
-    <AddColumn v-for="positive in positivesFromLocalStorageRef" @click:remove="() => removeHandler(positive)">{{positive}}</AddColumn>
+    <AddColumn v-for="(positive,index) in positivesFromLocalStorageRef" :key="index" @click:remove="() => removeHandler(positive)">{{positive}}</AddColumn>
   </div>
 </BaseContainer>
 </template>

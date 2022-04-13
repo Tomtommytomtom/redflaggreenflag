@@ -39,13 +39,13 @@ const measureMaxWidth = () => {
   maxWidth.value = rect.width - padding
 }
 
-const testTextWidth = (text) => {
+const testTextWidth = (textToTest) => {
   const c = document.createElement("canvas");
   const ctx = c.getContext("2d");
   ctx.font = "12px Inter var";
   
   
-  return Math.ceil(ctx.measureText(text).width)
+  return Math.ceil(ctx.measureText(textToTest).width)
 }
 
 onMounted(() => {

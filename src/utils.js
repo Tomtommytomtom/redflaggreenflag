@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { computed, ref } from "vue";
 import positivesRaw from "./assets/GENERATED-POSITIVES.txt?raw";
 import negativesRaw from "./assets/GENERATED-NEGATIVES.txt?raw";

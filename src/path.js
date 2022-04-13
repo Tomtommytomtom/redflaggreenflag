@@ -331,7 +331,6 @@ const THIRD_SEQUENCE_TARGETS = [
 export const removePaths = () => {
   const allTargets = [...FIRST_SEQUENCE_TARGETS,...SECOND_SEQUENCE_TARGETS,...THIRD_SEQUENCE_TARGETS]
   allTargets.forEach((id) => {
-    console.log('removing',id);
     document.querySelector(id)?.remove()
   })
   // reset height of overlay

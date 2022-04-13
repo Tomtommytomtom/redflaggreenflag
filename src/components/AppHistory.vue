@@ -1,15 +1,15 @@
 <template>
 <BaseContainer class="pt-4">
-  <div class="grid grid-cols-2 gap-2 mb-4" v-for="match in history" >
+  <div class="grid grid-cols-2 gap-2 mb-4" v-for="(match,index) in history" :key="index">
     <Card class="p-2 scrollable">
       <div>
         <span class="font-bold">YOUR DATE&nbsp;</span>
-        <span v-for="(p,index) in match.text.positives">
+        <span v-for="(p,index) in match.text.positives" :key="index">
           <span>{{p}}&nbsp;</span>
           <span class="font-bold" v-if="index !== match.text.positives.length - 1">AND&nbsp;</span>
         </span>
         <span class="font-bold">BUT&nbsp;</span>
-         <span v-for="(n,index) in match.text.negatives">
+         <span v-for="(n,index) in match.text.negatives" :key="index">
           <span>{{n}}&nbsp;</span>
           <span class="font-bold" v-if="index !== match.text.negatives.length - 1">AND&nbsp;</span>
         </span>

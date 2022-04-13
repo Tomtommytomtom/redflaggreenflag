@@ -10,9 +10,9 @@
       </CardButton>
     </div>
   </div>
-</template>s
+</template>
 
-<script lang="ts" setup>
+<script  setup>
 import { XIcon } from "@heroicons/vue/outline";
 import CardButton from "./CardButton.vue"
 import Card from "./Card.vue"

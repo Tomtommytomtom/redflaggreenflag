@@ -7,7 +7,7 @@
 </BaseContainer>
 </template>
 
-<script lang="ts" setup>
+<script  setup>
 import { negativesFromLocalStorageRef, addCustomNegative, removeNegative } from '@/utils';
 import AddInputColumn from './AddInputColumn.vue';
 import AddColumn from './AddColumn.vue';

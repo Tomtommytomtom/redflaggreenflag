@@ -6,7 +6,7 @@
   </Card>
 </template>
 
-<script lang="ts" setup>
+<script  setup>
 import Card from "./Card.vue"
 
 const emit = defineEmits(["click"])

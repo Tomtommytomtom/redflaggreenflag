@@ -41,6 +41,7 @@ import {
   removePaths,
   } from "@/path";
 import BaseContainer from "./BaseContainer.vue";
+import { addToHistory } from "@/history";
 
 const disableButtons = ref(true);
 
@@ -83,6 +84,13 @@ const resetEverything = () => {
 };
 
 const next = () => {
+  addToHistory({
+    text: {
+      positives: positives.value,
+      negatives: negatives.value
+    },
+    action: "NEXT"
+  })
   disableButtons.value = true;
   const callbacks = [];
   callbacks[3] = () => {
@@ -93,6 +101,13 @@ const next = () => {
 };
 
 const date = () => {
+  addToHistory({
+    text: {
+      positives: positives.value,
+      negatives: negatives.value
+    },
+    action: "DATE"
+  })
   disableButtons.value = true;
   const callbacks = [];
   callbacks[4] = () => {

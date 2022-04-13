@@ -2,12 +2,12 @@
 <BaseContainer class="mt-12">
   <div class="grid grid-cols-1 gap-4">
     <AddInputColumn @add="addHandler"/>
-    <AddColumn v-for="positive in positivesFromLocalStorageRef" @click:remove="removeHandler">{{positive}}</AddColumn>
+    <AddColumn v-for="positive in positivesFromLocalStorageRef" @click:remove="() => removeHandler(positive)">{{positive}}</AddColumn>
   </div>
 </BaseContainer>
 </template>
 
-<script lang="ts" setup>
+<script  setup>
 import { positivesFromLocalStorageRef, addCustomPositive, removePositive } from '@/utils';
 import AddInputColumn from './AddInputColumn.vue';
 import AddColumn from './AddColumn.vue';

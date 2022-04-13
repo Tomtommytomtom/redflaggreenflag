@@ -14,7 +14,7 @@
   </Card>
 </template>
 
-<script lang="ts" setup>
+<script  setup>
 import { computed, onMounted, ref } from "vue";
 import Card from "./Card.vue"
 

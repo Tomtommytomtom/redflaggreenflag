@@ -20,6 +20,7 @@ export const addCustomNegative = (newNegative) => {
 
 export const removePositive = (positive) => {
   const index = positivesFromLocalStorageRef.value.indexOf(positive)
+  console.log(index,'inside of remove',positive);
   if(index === -1){
     return
   }

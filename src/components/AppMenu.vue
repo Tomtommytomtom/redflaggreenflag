@@ -23,7 +23,9 @@
     <div>
       <!-- Empty -->
     </div>
-    <MenuCard isBlack>History</MenuCard>
+    <RouterLink to="/history">
+      <MenuCard isBlack>History</MenuCard>
+    </RouterLink>
   </div>
 </BaseContainer>
 </template>

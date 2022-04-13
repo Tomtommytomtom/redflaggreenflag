@@ -14,7 +14,7 @@
   </Card>
 </template>
 
-<script lang="ts" setup>
+<script  setup>
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/vue/outline";
 import { computed } from "vue";
 import Card from "./Card.vue";

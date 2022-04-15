@@ -30,12 +30,12 @@
       <div class="grid grid-cols-2 gap-2">
         <Card
           class="justify-center"
-          :class="{ 'hidden-but-still-there': match.action === 'DATE' }"
+          :class="{ 'hidden-but-still-there': match.action !== 'DATE' }"
           >DATE</Card
         >
         <Card
           class="justify-center"
-          :class="{ 'hidden-but-still-there': match.action !== 'DATE' }"
+          :class="{ 'hidden-but-still-there': match.action === 'DATE' }"
           isBlack
           >(NEXT)</Card
         >

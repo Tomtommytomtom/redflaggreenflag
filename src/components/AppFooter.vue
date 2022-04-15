@@ -13,7 +13,7 @@ import { computed } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { ChevronLeftIcon } from "@heroicons/vue/outline";
 import FlagSVGVue from "./FlagSVG.vue";
-import MenuSVG from "./MenuOldSVG.vue";
+import MenuSVG from "./MenuSVG.vue";
 
 const router = useRouter();
 

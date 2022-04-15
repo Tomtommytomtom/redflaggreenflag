@@ -1,14 +1,20 @@
 <template>
-
   <div class="header italic">
-    <RouterLink to="/"><span class="white-bg"><span class="font-bold">RED</span> FLAGS</span></RouterLink><br />
-    <RouterLink to="/"><span class="white-bg"><span class="font-bold">GREEN</span> FLAGS</span></RouterLink>
+    <RouterLink to="/"
+      ><span class="white-bg"
+        ><span class="font-bold">RED</span> FLAGS</span
+      ></RouterLink
+    ><br />
+    <RouterLink to="/"
+      ><span class="white-bg"
+        ><span class="font-bold">GREEN</span> FLAGS</span
+      ></RouterLink
+    >
   </div>
-
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink } from "vue-router";
 </script>
 
 <style scoped>

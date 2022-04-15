@@ -20,9 +20,9 @@
           <MenuCard isBlack>(Red)</MenuCard>
         </RouterLink>
       </div>
-      <div>
-        <!-- Empty -->
-      </div>
+      <RouterLink to="/about">
+        <MenuCard>About</MenuCard>
+      </RouterLink>
       <RouterLink to="/history">
         <MenuCard isBlack>History</MenuCard>
       </RouterLink>

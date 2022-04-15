@@ -19,7 +19,7 @@
     left: -1px;
     width: calc(100% + 2px);
     height: calc(2 * 16vh + 0.5rem + 3px);
-    top: calc(16vh + 0.5rem - 2px)
+    top: calc(16vh + 0.5rem - 2px);
   }
   .no-styles-button {
     background-color: inherit;

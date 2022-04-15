@@ -1,28 +1,36 @@
 <template>
-<BaseContainer class="justify-end">
-  <div class="flex">
-    <div class="flex w-1/2 flex-col pr-1">
-      <PerksColumn :perks="positives" :visible="visiblePositives" />
-      <span style="visibility: hidden">AND</span>
-      <div class="flex">
-        <button @click="date" :disabled="disableButtons" class="box mr-1 basis-1/2">
-          DATE
-        </button>
-        <button @click="next" :disabled="disableButtons" class="box black-box basis-1/2">
-          (NEXT)
-        </button>
+  <BaseContainer class="justify-end">
+    <div class="flex">
+      <div class="flex w-1/2 flex-col pr-1">
+        <PerksColumn :perks="positives" :visible="visiblePositives" />
+        <span style="visibility: hidden">AND</span>
+        <div class="flex">
+          <button
+            @click="date"
+            :disabled="disableButtons"
+            class="box mr-1 basis-1/2"
+          >
+            DATE
+          </button>
+          <button
+            @click="next"
+            :disabled="disableButtons"
+            class="box black-box basis-1/2"
+          >
+            (NEXT)
+          </button>
+        </div>
+      </div>
+      <div class="w-1/2 pl-1">
+        <PerksColumn
+          style="visibility: hidden"
+          :visible="visiblePositives"
+          :perks="positives"
+        />
+        <NegativeColumn :negatives="negatives" :visible="visibleNegatives" />
       </div>
     </div>
-    <div class="w-1/2 pl-1">
-      <PerksColumn
-        style="visibility: hidden"
-        :visible="visiblePositives"
-        :perks="positives"
-      />
-      <NegativeColumn :negatives="negatives" :visible="visibleNegatives" />
-    </div>
-  </div>
-</BaseContainer>
+  </BaseContainer>
 </template>
 
 <script setup>
@@ -39,7 +47,7 @@ import {
   playThirdAnimationSequence,
   drawPaths,
   removePaths,
-  } from "@/path";
+} from "@/path";
 import { addToHistory } from "@/history";
 import BaseContainer from "./BaseContainer.vue";
 
@@ -87,10 +95,10 @@ const next = () => {
   addToHistory({
     text: {
       positives: positives.value,
-      negatives: negatives.value
+      negatives: negatives.value,
     },
-    action: "NEXT"
-  })
+    action: "NEXT",
+  });
   disableButtons.value = true;
   const callbacks = [];
   callbacks[3] = () => {
@@ -104,10 +112,10 @@ const date = () => {
   addToHistory({
     text: {
       positives: positives.value,
-      negatives: negatives.value
+      negatives: negatives.value,
     },
-    action: "DATE"
-  })
+    action: "DATE",
+  });
   disableButtons.value = true;
   const callbacks = [];
   callbacks[4] = () => {
@@ -135,7 +143,6 @@ const removeListeners = () => {
 };
 
 onMounted(() => {
-  
   drawPaths();
 });
 

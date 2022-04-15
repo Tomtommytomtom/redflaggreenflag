@@ -14,53 +14,54 @@
   </Card>
 </template>
 
-<script  setup>
+<script setup>
 import { computed, onMounted, ref } from "vue";
-import Card from "./Card.vue"
+import Card from "./Card.vue";
 
-const input = ref()
-const maxWidth = ref()
+const input = ref();
+const maxWidth = ref();
 
 const props = defineProps({
-  modelValue: String
-})
+  modelValue: String,
+});
 
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:modelValue"]);
 
 const text = computed({
   get: () => props.modelValue,
-  set: (newValue) => emit("update:modelValue",newValue)
-})
+  set: (newValue) => emit("update:modelValue", newValue),
+});
 
 const measureMaxWidth = () => {
-  const card = document.getElementById("textarea-container-card")
-  const rect = card.getBoundingClientRect()
-  const padding = parseFloat(window.getComputedStyle(card, null).getPropertyValue('padding-left')) * 2
-  maxWidth.value = rect.width - padding
-}
+  const card = document.getElementById("textarea-container-card");
+  const rect = card.getBoundingClientRect();
+  const padding =
+    parseFloat(
+      window.getComputedStyle(card, null).getPropertyValue("padding-left")
+    ) * 2;
+  maxWidth.value = rect.width - padding;
+};
 
 const testTextWidth = (textToTest) => {
   const c = document.createElement("canvas");
   const ctx = c.getContext("2d");
   ctx.font = "12px Inter var";
-  
-  
-  return Math.ceil(ctx.measureText(textToTest).width)
-}
+
+  return Math.ceil(ctx.measureText(textToTest).width);
+};
 
 onMounted(() => {
-  measureMaxWidth()
-})
+  measureMaxWidth();
+});
 
 const resizeInput = () => {
-  const textWidth = testTextWidth(input.value.value)
-  let rows = Math.floor(textWidth / (maxWidth.value + 10)) + 1
-  if(rows >= 3){
-    rows = 3
+  const textWidth = testTextWidth(input.value.value);
+  let rows = Math.floor(textWidth / (maxWidth.value + 10)) + 1;
+  if (rows >= 3) {
+    rows = 3;
   }
-  input.value.rows = rows
-}
-
+  input.value.rows = rows;
+};
 </script>
 
 <style scoped lang="scss">
@@ -79,6 +80,6 @@ const resizeInput = () => {
   overflow-y: hidden;
   overflow-x: hidden;
   background-color: inherit;
-  color: inherit;  
+  color: inherit;
 }
 </style>

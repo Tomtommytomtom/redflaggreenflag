@@ -10,18 +10,16 @@
 
 <script setup>
 import { computed } from "vue";
-import { RouterLink, useRoute , useRouter } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 import { ChevronLeftIcon } from "@heroicons/vue/outline";
 import FlagSVGVue from "./FlagSVG.vue";
-import MenuSVG from "./MenuSVG.vue";
+import MenuSVG from "./MenuOldSVG.vue";
 
-const router = useRouter()
+const router = useRouter();
 
-const goBack = () => router.go(-1)
+const goBack = () => router.go(-1);
 
 const route = useRoute();
-
-
 
 const isRoot = computed(() => route.path === "/");
 </script>

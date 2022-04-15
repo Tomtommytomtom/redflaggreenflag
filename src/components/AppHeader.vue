@@ -1,6 +1,6 @@
 <template>
   <div class="header italic">
-    <span class="white-bg"><span class="font-bold">RED</span> FLAGS</span><br>
+    <span class="white-bg"><span class="font-bold">RED</span> FLAGS</span><br />
     <span class="white-bg"><span class="font-bold">GREEN</span> FLAGS</span>
   </div>
 </template>
@@ -14,7 +14,7 @@
   width: 100%;
 }
 
-.white-bg{
+.white-bg {
   background-color: white;
 }
 </style>

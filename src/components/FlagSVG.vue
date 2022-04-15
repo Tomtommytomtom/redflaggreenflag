@@ -32,7 +32,7 @@
   stroke-miterlimit: 10;
   stroke-width: 3px;
 }
-.cls-4{
+.cls-4 {
   fill: #000 !important;
 }
 </style>

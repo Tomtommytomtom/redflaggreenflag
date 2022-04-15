@@ -8,13 +8,17 @@
         {{ value }}
       </slot>
     </div>
-    <button :disabled="value === 1" class="no-styles-button basis-1/4" @click="value--">
+    <button
+      :disabled="value === 1"
+      class="no-styles-button basis-1/4"
+      @click="value--"
+    >
       <ChevronDownIcon class="m-auto h-6" />
     </button>
   </Card>
 </template>
 
-<script  setup>
+<script setup>
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/vue/outline";
 import { computed } from "vue";
 import Card from "./Card.vue";
@@ -35,7 +39,7 @@ const value = computed({
 </script>
 
 <style lang="scss" scoped>
-button:disabled{
+button:disabled {
   opacity: 0.2;
 }
 </style>

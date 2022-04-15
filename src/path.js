@@ -60,8 +60,6 @@ const drawFirstAnimationPaths = () => {
   const firstPerkBox = buildWithOffset(outerBoxRaw, firstPerkBoxRaw);
   const firstNegativeBox = buildWithOffset(outerBoxRaw, firstNegativeBoxRaw);
 
-  
-
   const boxLength = firstPerkBoxRaw.width;
 
   let distanceBetweenOuterboxAndFirstBox = Math.round(
@@ -88,7 +86,7 @@ const drawFirstAnimationPaths = () => {
     x: Math.round(firstNegativeBox.right - (boxLength * 1) / 3),
     y: Math.round(firstNegativeBox.top),
   };
-  
+
   const endingPoint = {
     x: Math.round(outerBox.right + 20),
     y: Math.round(secondBouncingPoint.y - 80),
@@ -106,7 +104,7 @@ const drawFirstAnimationPaths = () => {
 
   const svg = document.getElementById("svg-overlay");
 
-  svg.style.height = `${outerBoxRaw.height  }px`;
+  svg.style.height = `${outerBoxRaw.height}px`;
 
   drawBezierCurveArc({
     a: startingPoint,
@@ -292,8 +290,6 @@ export const drawPaths = () => {
   drawThirdAnimationPaths();
 };
 
-
-
 const showElement = (qsl) => {
   const el = document.querySelector(qsl);
   el.style.opacity = 1;
@@ -329,14 +325,18 @@ const THIRD_SEQUENCE_TARGETS = [
 ];
 
 export const removePaths = () => {
-  const allTargets = [...FIRST_SEQUENCE_TARGETS,...SECOND_SEQUENCE_TARGETS,...THIRD_SEQUENCE_TARGETS]
+  const allTargets = [
+    ...FIRST_SEQUENCE_TARGETS,
+    ...SECOND_SEQUENCE_TARGETS,
+    ...THIRD_SEQUENCE_TARGETS,
+  ];
   allTargets.forEach((id) => {
-    document.querySelector(id)?.remove()
-  })
+    document.querySelector(id)?.remove();
+  });
   // reset height of overlay
   const svg = document.getElementById("svg-overlay");
-  svg.style.height = '1px';
-}
+  svg.style.height = "1px";
+};
 
 export const resetFirstAnimationSequence = () => {
   FIRST_SEQUENCE_TARGETS.forEach(hideElement);

@@ -5,44 +5,65 @@ import negativesRaw from "./assets/GENERATED-NEGATIVES.txt?raw";
 
 const randomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-export const positivesFromLocalStorageRef = ref(JSON.parse(localStorage.getItem("positives")) || [])
-export const negativesFromLocalStorageRef = ref(JSON.parse(localStorage.getItem("negatives")) || [])
-
+export const positivesFromLocalStorageRef = ref(
+  JSON.parse(localStorage.getItem("positives")) || []
+);
+export const negativesFromLocalStorageRef = ref(
+  JSON.parse(localStorage.getItem("negatives")) || []
+);
 
 export const addCustomPositive = (newPositive) => {
-  positivesFromLocalStorageRef.value.unshift(newPositive)
-  localStorage.setItem("positives",JSON.stringify(positivesFromLocalStorageRef.value))
-}
+  positivesFromLocalStorageRef.value.unshift(newPositive);
+  localStorage.setItem(
+    "positives",
+    JSON.stringify(positivesFromLocalStorageRef.value)
+  );
+};
 
 export const addCustomNegative = (newNegative) => {
-  negativesFromLocalStorageRef.value.unshift(newNegative)
-  localStorage.setItem("negatives",JSON.stringify(negativesFromLocalStorageRef.value))
-}
+  negativesFromLocalStorageRef.value.unshift(newNegative);
+  localStorage.setItem(
+    "negatives",
+    JSON.stringify(negativesFromLocalStorageRef.value)
+  );
+};
 
 export const removePositive = (positive) => {
-  const index = positivesFromLocalStorageRef.value.indexOf(positive)
-  
-  if(index === -1){
-    return
+  const index = positivesFromLocalStorageRef.value.indexOf(positive);
+
+  if (index === -1) {
+    return;
   }
-  positivesFromLocalStorageRef.value.splice(index,1)
-  localStorage.setItem("positives",JSON.stringify(positivesFromLocalStorageRef.value))
-}
+  positivesFromLocalStorageRef.value.splice(index, 1);
+  localStorage.setItem(
+    "positives",
+    JSON.stringify(positivesFromLocalStorageRef.value)
+  );
+};
 
 export const removeNegative = (negative) => {
-  const index = negativesFromLocalStorageRef.value.indexOf(negative)
-  if(index === -1){
-    return
+  const index = negativesFromLocalStorageRef.value.indexOf(negative);
+  if (index === -1) {
+    return;
   }
-  negativesFromLocalStorageRef.value.splice(index,1)
-  localStorage.setItem("negatives",JSON.stringify(negativesFromLocalStorageRef.value))
-}
+  negativesFromLocalStorageRef.value.splice(index, 1);
+  localStorage.setItem(
+    "negatives",
+    JSON.stringify(negativesFromLocalStorageRef.value)
+  );
+};
 
-const staticPositives = positivesRaw.split("\n")
-const staticNegatives = negativesRaw.split("\n")
+const staticPositives = positivesRaw.split("\n");
+const staticNegatives = negativesRaw.split("\n");
 
-const positives = computed(() => [...positivesFromLocalStorageRef.value,...staticPositives])
-const negatives = computed(() => [...negativesFromLocalStorageRef.value,...staticNegatives])
+const positives = computed(() => [
+  ...positivesFromLocalStorageRef.value,
+  ...staticPositives,
+]);
+const negatives = computed(() => [
+  ...negativesFromLocalStorageRef.value,
+  ...staticNegatives,
+]);
 
 export const randomPerk = () => randomElement(positives);
 

@@ -49,4 +49,8 @@ import Footer from "@/components/AppFooter.vue";
   max-width: 500px;
   margin: 0 auto;
 }
+
+html{
+  touch-action: manipulation;
+}
 </style>

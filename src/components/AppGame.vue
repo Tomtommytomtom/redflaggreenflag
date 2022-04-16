@@ -91,7 +91,13 @@ const resetEverything = () => {
   addListeners();
 };
 
+const scrollToBottom = () => window.scrollTo({
+  top: document.body.scrollHeight,
+  behavior: 'smooth'
+});
+
 const next = () => {
+  scrollToBottom()
   addToHistory({
     text: {
       positives: positives.value,
@@ -109,6 +115,7 @@ const next = () => {
 };
 
 const date = () => {
+  scrollToBottom()
   addToHistory({
     text: {
       positives: positives.value,

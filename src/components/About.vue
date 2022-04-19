@@ -36,7 +36,7 @@
         </Card>
         <span>(Us)</span>
         <Card class="flex-col justify-center" isBlack>
-          <span>Henrike - Design and Concept</span>
+          <span class="mb-3"><a class="blacklink" href="https://instagram.com/henrikehof?igshid=YmMyMTA2M2Y=">Henrike <InstagramIcon style="display: inline-block"/>- Design and Concept </a></span>
           <span>Tom - Development and Coding</span>
         </Card>
       </div>
@@ -47,6 +47,8 @@
 <script setup>
 import BaseContainer from "./BaseContainer.vue";
 import Card from "./Card.vue";
+import InstagramIcon from "./InstagramIcon.vue";
+import GithubIcon from "./GithubIcon.vue";
 </script>
 
 <style scoped lang="scss">
@@ -57,5 +59,6 @@ a {
 }
 .blacklink {
   color: #ddd;
+  text-decoration: none;
 }
 </style>

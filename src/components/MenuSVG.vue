@@ -14,7 +14,7 @@
     <circle class="cls-4" cx="24.6" cy="22.87" r="13.32" />
   </svg>
 </template>
-<style>
+<style scoped>
 .cls-1,
 .cls-3 {
   stroke: #000;

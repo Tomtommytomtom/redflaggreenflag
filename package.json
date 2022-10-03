@@ -13,7 +13,7 @@
   "dependencies": {
     "@heroicons/vue": "^1.0.5",
     "animejs": "^3.2.1",
-    "vue": "^3.2.31",
+    "vue": "^3.2.40",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
